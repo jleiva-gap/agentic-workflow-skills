@@ -94,6 +94,8 @@ The bundle is generated output and should not be edited manually.
 
 The published marketplace files come from GitHub Actions and are hosted by GitHub Pages.
 
+Before the first publish, set the repository's Pages source to `GitHub Actions` in GitHub Settings so the deployment workflow can initialize the site.
+
 The install URLs should point at:
 
 - `https://jleiva-gap.github.io/agentic-workflow-skills/marketplace.json`
