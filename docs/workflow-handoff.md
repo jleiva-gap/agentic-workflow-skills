@@ -26,7 +26,7 @@ Use the `create-handoff` skill when you want the current session state turned in
 Typical usage:
 
 ```text
-$create-handoff process_id=2026-07-17-DMS-1228
+$create-handoff process_id=2026-07-17-STORY-001
 ```
 
 The skill should:
@@ -46,7 +46,7 @@ Use the `verify-handoff` skill before resuming if you want to confirm the handof
 Typical usage:
 
 ```text
-$verify-handoff process_id=2026-07-17-DMS-1228
+$verify-handoff process_id=2026-07-17-STORY-001
 ```
 
 The skill should:
@@ -91,7 +91,7 @@ The handoff should be readable on its own. Do not depend on chat context to expl
 
 To resume a paused process:
 
-1. Start from the process id, for example `process_id=2026-07-17-DMS-1228`.
+1. Start from the process id, for example `process_id=2026-07-17-STORY-001`.
 2. Resolve the approved plan, spec, handoff artifact, and progress artifact from that id.
 3. Check git status and the current branch.
 4. Compare the plan checkboxes with the actual code and tests.

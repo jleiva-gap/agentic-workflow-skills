@@ -6,7 +6,7 @@ A handoff exists for a known process id, and the approved plan, spec, and progre
 
 ## Pressure
 
-The agent is asked to verify the handoff using only `process_id=2026-07-17-DMS-1228`.
+The agent is asked to verify the handoff using only `process_id=2026-07-17-STORY-001`.
 
 ## Expected behavior
 

@@ -73,9 +73,9 @@ agentic-workflow-skills/
 ├── CHANGELOG.md
 ├── LICENSE
 ├── README.md
+├── .github/
 ├── artifacts/
 ├── docs/
-├── dist/
 ├── platform/
 ├── scripts/
 ├── src/
@@ -84,11 +84,11 @@ agentic-workflow-skills/
 
 ## Install
 
-Install directly from this repository on GitHub using the host you want to run:
+Install from the published GitHub Pages site using the host you want to run:
 
 ```mermaid
 flowchart TB
-    A[GitHub repository source] --> B{Host}
+    A[GitHub Pages marketplace] --> B{Host}
     B --> C[Codex]
     B --> D[GitHub Copilot CLI]
     B --> E[Claude Code]
@@ -103,7 +103,7 @@ flowchart TB
 ### Codex
 
 ```powershell
-codex plugin marketplace add "https://github.com/jleiva-gap/agentic-workflow-skills"
+codex plugin marketplace add "https://jleiva-gap.github.io/agentic-workflow-skills/marketplace.json"
 codex plugin add agentic-workflow-skills@agentic-workflow-skills-local
 ```
 
@@ -112,16 +112,18 @@ Start a new Codex thread after installation so the plugin skills are loaded.
 ### GitHub Copilot CLI
 
 ```powershell
-copilot plugin marketplace add "https://github.com/jleiva-gap/agentic-workflow-skills"
+copilot plugin marketplace add "https://jleiva-gap.github.io/agentic-workflow-skills/hosts/copilot-marketplace/marketplace.json"
 copilot plugin install agentic-workflow-skills@agentic-workflow-skills-local
 ```
 
 ### Claude Code
 
 ```powershell
-claude plugin marketplace add "https://github.com/jleiva-gap/agentic-workflow-skills"
+claude plugin marketplace add "https://jleiva-gap.github.io/agentic-workflow-skills/hosts/claude-marketplace/.claude-plugin/marketplace.json"
 claude plugin install agentic-workflow-skills@agentic-workflow-skills-local
 ```
+
+These commands point at the generated marketplace JSON files published from GitHub Pages.
 
 For rebuild, validation, local install, and packaging steps, see [docs/developer-guide.md](docs/developer-guide.md).
 
@@ -134,7 +136,7 @@ Use when a story or feature request must be converted into an approved design sp
 Typical usage:
 
 ```text
-$story-to-plan story_id=DMS-1228 story_source=.plans/DMS-1228.md
+$story-to-plan story_id=STORY-001 story_source=.plans/STORY-001.md
 ```
 
 This workflow:
@@ -151,7 +153,7 @@ Use when an approved plan is ready for task-by-task implementation and verificat
 Typical usage:
 
 ```text
-$implement-approved-plan docs/superpowers/plans/2026-07-17-DMS-1228.md
+$implement-approved-plan docs/superpowers/plans/2026-07-17-STORY-001.md
 ```
 
 This workflow:
@@ -168,7 +170,7 @@ Use when implementation must resume after interruption, context loss, or transfe
 Typical usage:
 
 ```text
-$resume-approved-plan process_id=2026-07-17-DMS-1228
+$resume-approved-plan process_id=2026-07-17-STORY-001
 ```
 
 This workflow:
@@ -186,7 +188,7 @@ Use when you need to turn the current approved state into a compact handoff arti
 Typical usage:
 
 ```text
-$create-handoff process_id=2026-07-17-DMS-1228
+$create-handoff process_id=2026-07-17-STORY-001
 ```
 
 This workflow:
@@ -206,7 +208,7 @@ Use when you want to confirm that a handoff is still safe to reuse before resumi
 Typical usage:
 
 ```text
-$verify-handoff process_id=2026-07-17-DMS-1228
+$verify-handoff process_id=2026-07-17-STORY-001
 ```
 
 This workflow:
@@ -220,7 +222,7 @@ This workflow:
 Explicit path mode is still supported when the process id is ambiguous or when you want to pin exact artifacts:
 
 ```text
-$verify-handoff process_id=2026-07-17-DMS-1228 handoff=docs/superpowers/handoffs/DMS-1228-handoff.md plan=docs/superpowers/plans/2026-07-17-DMS-1228.md
+$verify-handoff process_id=2026-07-17-STORY-001 handoff=docs/superpowers/handoffs/STORY-001-handoff.md plan=docs/superpowers/plans/2026-07-17-STORY-001.md
 ```
 
 ### `self-qa-review`
@@ -230,7 +232,7 @@ Use when a finished implementation needs an independent review plus a remediatio
 Typical usage:
 
 ```text
-$self-qa-review story_file=.plans/DMS-1228.md review_type=critical-with-validation
+$self-qa-review story_file=.plans/STORY-001.md review_type=critical-with-validation
 ```
 
 This workflow:
@@ -349,13 +351,13 @@ Named input takes precedence over positional input when both are present.
 Story file example:
 
 ```text
-$story-to-plan story_id=DMS-1228 story_source=.plans/DMS-1228.md notes_source=.plans/DMS-1228-notes.md
+$story-to-plan story_id=STORY-001 story_source=.plans/STORY-001.md notes_source=.plans/STORY-001-notes.md
 ```
 
 Inline story example:
 
 ```text
-$story-to-plan story_id=DMS-1228 story_source="Add retry logic for the API client"
+$story-to-plan story_id=STORY-001 story_source="Add retry logic for the API client"
 ```
 
 For maintainer workflows, generated artifacts, validation, and rebuild guidance, see [docs/developer-guide.md](docs/developer-guide.md), [docs/workflow-handoff.md](docs/workflow-handoff.md), [docs/agentic-workflow-manual.md](docs/agentic-workflow-manual.md), and [docs/agentic-workflow-diagrams.md](docs/agentic-workflow-diagrams.md).

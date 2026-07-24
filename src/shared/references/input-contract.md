@@ -13,9 +13,9 @@ The workflows accept inputs in this order:
 Preferred format:
 
 ```text
-story_id=DMS-1228
-story_source=.plans/DMS-1228.md
-notes_source=.plans/DMS-1228-implementation-notes.md
+story_id=STORY-001
+story_source=.plans/STORY-001.md
+notes_source=.plans/STORY-001-implementation-notes.md
 related_paths=src/ModuleA,tests/ModuleA.Tests
 constraints=.NET 10; preserve API compatibility
 test_command=dotnet test

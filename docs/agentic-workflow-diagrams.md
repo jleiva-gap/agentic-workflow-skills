@@ -18,7 +18,7 @@ Recommended process id format:
 
 Example:
 
-- `2026-07-17-DMS-1228`
+- `2026-07-17-STORY-001`
 
 Use the process id first for `create-handoff`, `verify-handoff`, and `resume-approved-plan`; add explicit paths only when needed.
 
@@ -245,10 +245,10 @@ Minimum contents:
 Example:
 
 ```text
-Process id: 2026-07-17-DMS-1228
-Spec: docs/superpowers/specs/2026-07-17-DMS-1228-design.md
-Plan: docs/superpowers/plans/2026-07-17-DMS-1228.md
-Progress: docs/superpowers/progress/DMS-1228-progress.md
+Process id: 2026-07-17-STORY-001
+Spec: docs/superpowers/specs/2026-07-17-STORY-001-design.md
+Plan: docs/superpowers/plans/2026-07-17-STORY-001.md
+Progress: docs/superpowers/progress/STORY-001-progress.md
 Next: implement task 3
 Blockers: none
 Review findings: ./.wi/reviews/20260722_140000_copilot_critical_review.md

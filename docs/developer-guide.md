@@ -11,7 +11,7 @@ Rebuild when you change any of the following:
 - `scripts/`
 - shared templates or references that feed generation
 
-You do not need to rebuild just to use the published GitHub marketplace source in Codex. Rebuilds are for maintainers and contributors.
+You do not need to rebuild just to use the published GitHub Pages marketplace source in Codex. Rebuilds are for maintainers and contributors.
 
 ## Build
 
@@ -90,12 +90,20 @@ It includes:
 
 The bundle is generated output and should not be edited manually.
 
-## Install From Marketplace
+## GitHub Pages Publish
 
-To prepare Codex marketplace install commands from the GitHub repository URL:
+The published marketplace files come from GitHub Actions and are hosted by GitHub Pages.
+
+The install URLs should point at:
+
+- `https://jleiva-gap.github.io/agentic-workflow-skills/marketplace.json`
+- `https://jleiva-gap.github.io/agentic-workflow-skills/hosts/copilot-marketplace/marketplace.json`
+- `https://jleiva-gap.github.io/agentic-workflow-skills/hosts/claude-marketplace/.claude-plugin/marketplace.json`
+
+To prepare marketplace install commands from the local repository configuration:
 
 ```powershell
-pwsh ./scripts/Install-AgenticWorkflowPlugin.ps1 -Platform codex -Source marketplace -MarketplaceSource https://github.com/jleiva-gap/agentic-workflow-skills
+pwsh ./scripts/Install-AgenticWorkflowPlugin.ps1 -Platform all -Source marketplace
 ```
 
 To install all host bundles from the generated output:

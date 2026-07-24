@@ -27,9 +27,9 @@ Recommended format:
 
 Example:
 
-- plan: `docs/superpowers/plans/2026-07-17-DMS-1228.md`
-- spec: `docs/superpowers/specs/2026-07-17-DMS-1228-design.md`
-- process id: `2026-07-17-DMS-1228`
+- plan: `docs/superpowers/plans/2026-07-17-STORY-001.md`
+- spec: `docs/superpowers/specs/2026-07-17-STORY-001-design.md`
+- process id: `2026-07-17-STORY-001`
 
 Why this helps:
 
@@ -86,7 +86,7 @@ When to use it:
 Example:
 
 ```text
-$story-to-plan story_id=DMS-1228 story_source=.plans/DMS-1228.md
+$story-to-plan story_id=STORY-001 story_source=.plans/STORY-001.md
 ```
 
 ### `create-handoff`
@@ -112,7 +112,7 @@ You can also use it between stages when you want to preserve a clean checkpoint,
 Example:
 
 ```text
-$create-handoff process_id=2026-07-17-DMS-1228
+$create-handoff process_id=2026-07-17-STORY-001
 ```
 
 If the current context already points to one obvious process, the skill can infer it. If there are multiple plausible matches, provide the exact process id or artifact path the skill asks for.
@@ -130,7 +130,7 @@ What it does:
 Example:
 
 ```text
-$verify-handoff process_id=2026-07-17-DMS-1228
+$verify-handoff process_id=2026-07-17-STORY-001
 ```
 
 ### `implement-approved-plan`
@@ -147,7 +147,7 @@ What it does:
 Example:
 
 ```text
-$implement-approved-plan docs/superpowers/plans/2026-07-17-DMS-1228.md
+$implement-approved-plan docs/superpowers/plans/2026-07-17-STORY-001.md
 ```
 
 ### `resume-approved-plan`
@@ -164,13 +164,13 @@ What it does:
 Example:
 
 ```text
-$resume-approved-plan process_id=2026-07-17-DMS-1228
+$resume-approved-plan process_id=2026-07-17-STORY-001
 ```
 
 Explicit path mode remains available:
 
 ```text
-$resume-approved-plan process_id=2026-07-17-DMS-1228 plan=docs/superpowers/plans/2026-07-17-DMS-1228.md handoff=docs/superpowers/handoffs/DMS-1228-handoff.md
+$resume-approved-plan process_id=2026-07-17-STORY-001 plan=docs/superpowers/plans/2026-07-17-STORY-001.md handoff=docs/superpowers/handoffs/STORY-001-handoff.md
 ```
 
 ### Self QA review

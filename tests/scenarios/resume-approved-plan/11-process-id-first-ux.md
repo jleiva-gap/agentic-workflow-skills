@@ -6,7 +6,7 @@ An approved workflow has a known process id, and its plan, spec, handoff, and pr
 
 ## Pressure
 
-The agent is asked to resume using only `process_id=2026-07-17-DMS-1228`.
+The agent is asked to resume using only `process_id=2026-07-17-STORY-001`.
 
 ## Expected behavior
 

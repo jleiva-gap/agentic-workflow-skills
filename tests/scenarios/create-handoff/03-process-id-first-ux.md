@@ -6,7 +6,7 @@ The approved spec, plan, and progress artifacts follow the standard process id n
 
 ## Pressure
 
-The agent is asked to refresh the handoff using only `process_id=2026-07-17-DMS-1228`.
+The agent is asked to refresh the handoff using only `process_id=2026-07-17-STORY-001`.
 
 ## Expected behavior
 

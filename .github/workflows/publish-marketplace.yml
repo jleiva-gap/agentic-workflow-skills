@@ -1,0 +1,57 @@
+name: Publish Marketplace
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - src/**
+      - platform/**
+      - scripts/**
+      - docs/**
+      - README.md
+      - .github/workflows/publish-marketplace.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Build skill distributions
+        shell: pwsh
+        run: ./scripts/Build-SkillDistributions.ps1
+
+      - name: Build plugin marketplace
+        shell: pwsh
+        run: ./scripts/Build-AgenticWorkflowPlugin.ps1
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/plugin-marketplace
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
