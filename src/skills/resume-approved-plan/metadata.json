@@ -1,0 +1,6 @@
+{
+  "name": "resume-approved-plan",
+  "description": "Use when implementation of an approved plan must resume from a process id, handoff, or explicit plan path after interruption, context loss, or transfer.",
+  "argumentHint": "process_id=<process-id> [plan=<path>] [handoff=<path>] [progress=<path>]",
+  "allowImplicitInvocation": false
+}

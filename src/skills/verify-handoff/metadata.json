@@ -1,0 +1,6 @@
+{
+  "name": "verify-handoff",
+  "description": "Use when you need to confirm that a process handoff still matches the approved plan, progress, and git state before resuming work.",
+  "argumentHint": "process_id=<process-id> [handoff=<path>] [plan=<path>] [spec=<path>] [progress=<path>]",
+  "allowImplicitInvocation": false
+}

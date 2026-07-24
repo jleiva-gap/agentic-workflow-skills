@@ -1,0 +1,6 @@
+{
+  "name": "critical-review",
+  "description": "Use when a story, ticket, or change needs a strict evidence-based review before it is sent to a developer.",
+  "argumentHint": "<story-file> [repo-root] [output-dir] [base-ref] [review-scope] [agent-name] [run-tests] [output-mode] [token-budget]",
+  "allowImplicitInvocation": false
+}
