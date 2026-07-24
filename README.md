@@ -29,8 +29,16 @@ The review logic itself stays in the review skill family shipped with this packa
 
 ## Workflow
 
-```text
-story -> approved design -> approved plan -> implementation -> self QA review -> handoff -> resume when needed
+```mermaid
+flowchart LR
+    A[Story or feature request] --> B[Approved design]
+    B --> C[Approved plan]
+    C --> D[Implementation]
+    D --> E[Self QA review]
+    E -->|Pass| F[Handoff]
+    E -->|Findings| G[Remediation handoff]
+    G --> C
+    F --> H[Resume when needed]
 ```
 
 When the self-QA pass finds issues, the flow branches through a remediation handoff before planning the fix.
@@ -76,7 +84,23 @@ agentic-workflow-skills/
 
 ## Install
 
-To install the Codex plugin directly from this repository on GitHub:
+Install directly from this repository on GitHub using the host you want to run:
+
+```mermaid
+flowchart TB
+    A[GitHub repository source] --> B{Host}
+    B --> C[Codex]
+    B --> D[GitHub Copilot CLI]
+    B --> E[Claude Code]
+    C --> C1[codex plugin marketplace add]
+    C1 --> C2[codex plugin add]
+    D --> D1[copilot plugin marketplace add]
+    D1 --> D2[copilot plugin install]
+    E --> E1[claude plugin marketplace add]
+    E1 --> E2[claude plugin install]
+```
+
+### Codex
 
 ```powershell
 codex plugin marketplace add "https://github.com/jleiva-gap/agentic-workflow-skills"
@@ -85,7 +109,21 @@ codex plugin add agentic-workflow-skills@agentic-workflow-skills-local
 
 Start a new Codex thread after installation so the plugin skills are loaded.
 
-The repository also supports Claude Code and GitHub Copilot CLI through the generated marketplace bundle, but that is primarily a maintainer workflow. For rebuild, validation, local install, and packaging steps, see [docs/developer-guide.md](docs/developer-guide.md).
+### GitHub Copilot CLI
+
+```powershell
+copilot plugin marketplace add "https://github.com/jleiva-gap/agentic-workflow-skills"
+copilot plugin install agentic-workflow-skills@agentic-workflow-skills-local
+```
+
+### Claude Code
+
+```powershell
+claude plugin marketplace add "https://github.com/jleiva-gap/agentic-workflow-skills"
+claude plugin install agentic-workflow-skills@agentic-workflow-skills-local
+```
+
+For rebuild, validation, local install, and packaging steps, see [docs/developer-guide.md](docs/developer-guide.md).
 
 ## Skills
 
