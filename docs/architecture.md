@@ -21,11 +21,11 @@ The canonical workflow behavior lives in:
 - `src/skills/create-handoff/`
 - `src/skills/verify-handoff/`
 - `src/skills/self-qa-review/`
-- `src/skills/critical-review-agent/`
-- `src/skills/adversarial-review-agent/`
-- `src/skills/critical-adversarial-review-agent/`
-- `src/skills/review-findings-validator-agent/`
-- `src/skills/critical-review-with-validation-agent/`
+- `src/skills/critical-review/`
+- `src/skills/adversarial-review/`
+- `src/skills/critical-adversarial-review/`
+- `src/skills/review-findings-validator/`
+- `src/skills/critical-review-with-validation/`
 
 Shared support material lives in:
 

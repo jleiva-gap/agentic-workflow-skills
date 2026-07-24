@@ -8,13 +8,15 @@
 - `create-handoff`
 - `verify-handoff`
 - `self-qa-review`
-- `critical-review-agent`
-- `adversarial-review-agent`
-- `critical-adversarial-review-agent`
-- `review-findings-validator-agent`
-- `critical-review-with-validation-agent`
+- `critical-review`
+- `adversarial-review`
+- `critical-adversarial-review`
+- `review-findings-validator`
+- `critical-review-with-validation`
 
 The package keeps the canonical workflow behavior in `src/`, generates self-contained host-specific packages into `dist/`, and uses approved artifacts instead of chat history as the handoff between stages.
+
+For a practical guide to choosing among the review skills, see [docs/review-strategy.md](docs/review-strategy.md).
 
 When work crosses tools, the handoff record is the portability boundary. The next executor should be able to continue from the spec, plan, handoff, and progress files alone.
 
@@ -164,6 +166,16 @@ It contains:
 
 The bundle includes `self-qa-review` and the dedicated review skill family.
 
+Review skills are intentionally split by purpose:
+
+- `critical-review` for strict evidence-based review and defect detection
+- `adversarial-review` for challenge-oriented review that looks for edge cases, regressions, and hidden coupling
+- `critical-adversarial-review` when you want both strictness and adversarial pressure in one pass
+- `critical-review-with-validation` when you want the review findings validated by a second pass before you act on them
+- `review-findings-validator` when you only need to validate or de-duplicate findings from an existing review report
+
+If your host uses optional aliases, you can keep the skill name readable with a prefix such as `orion:<skill>`.
+
 You can install it in two ways:
 
 - local bundle mode, which copies the generated files into a workspace or user folder;
@@ -225,7 +237,7 @@ codex plugin add agentic-workflow-skills@agentic-workflow-skills-local
 
 #### Step 4: Install for Claude Code
 
-Claude Code supports the plugin marketplace pattern. Use this option when you want namespaced plugin skills such as `/agentic-workflow-skills:story-to-plan`.
+Claude Code supports the plugin marketplace pattern. Use this option when you want namespaced plugin skills such as `/orion:story-to-plan` when the host exposes the Orion namespace.
 
 Install the generated plugin bundle into the current project:
 
@@ -456,14 +468,14 @@ This workflow:
 - refreshes the handoff from the findings report when fixes are needed;
 - points the next planning step at `story-to-plan` with the findings report as remediation context.
 
-### `critical-review-agent`
+### `critical-review`
 
 Use when a story or change needs a strict evidence-based review before it is sent to a developer.
 
 Typical usage:
 
 ```text
-$critical-review-agent story_file=.plans/DMS-1234.md
+$critical-review story_file=.plans/DMS-1234.md
 ```
 
 This workflow:
@@ -473,14 +485,14 @@ This workflow:
 - keeps tests off unless they are explicitly needed;
 - writes a concise evidence-backed report.
 
-### `adversarial-review-agent`
+### `adversarial-review`
 
 Use when a review needs pressure testing for edge cases, regressions, and hidden failure modes.
 
 Typical usage:
 
 ```text
-$adversarial-review-agent story_file=.plans/DMS-1234.md
+$adversarial-review story_file=.plans/DMS-1234.md
 ```
 
 This workflow:
@@ -489,14 +501,14 @@ This workflow:
 - looks for invalid input, security, data integrity, and performance issues;
 - separates confirmed defects from plausible but unconfirmed risks.
 
-### `critical-adversarial-review-agent`
+### `critical-adversarial-review`
 
 Use when you want one pass that combines strict acceptance-criteria review with adversarial pressure testing.
 
 Typical usage:
 
 ```text
-$critical-adversarial-review-agent story_file=.plans/DMS-1234.md
+$critical-adversarial-review story_file=.plans/DMS-1234.md
 ```
 
 This workflow:
@@ -505,14 +517,14 @@ This workflow:
 - challenges the same change for boundary conditions and regressions;
 - deduplicates overlapping findings.
 
-### `review-findings-validator-agent`
+### `review-findings-validator`
 
 Use when a review report already exists and you need to validate or challenge its findings before sending them onward.
 
 Typical usage:
 
 ```text
-$review-findings-validator-agent story_file=.plans/DMS-1234.md review_report=.wi/reviews/20260724_120000_codex_critical_review.md
+$review-findings-validator story_file=.plans/DMS-1234.md review_report=.wi/reviews/20260724_120000_codex_critical_review.md
 ```
 
 This workflow:
@@ -521,14 +533,14 @@ This workflow:
 - classifies each finding as validated, duplicated, out of scope, or needing more evidence;
 - avoids inventing new findings unless they are necessary to explain a severe issue.
 
-### `critical-review-with-validation-agent`
+### `critical-review-with-validation`
 
 Use when a review needs a strict first pass and a validation pass before the final report is accepted.
 
 Typical usage:
 
 ```text
-$critical-review-with-validation-agent story_file=.plans/DMS-1234.md
+$critical-review-with-validation story_file=.plans/DMS-1234.md
 ```
 
 This workflow:

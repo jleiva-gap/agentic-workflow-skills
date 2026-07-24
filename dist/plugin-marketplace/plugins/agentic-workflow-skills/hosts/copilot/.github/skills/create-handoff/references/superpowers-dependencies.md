@@ -51,7 +51,8 @@ Required:
 
 ## Resolution rules
 
-- Resolve `superpowers:<name>` first when the host supports namespaces.
+- Resolve `orion:<name>` first when the host exposes the Orion namespace.
+- Resolve `superpowers:<name>` next when that namespace is available.
 - Permit an exact unqualified `<name>` fallback.
 - Reject approximate or semantically similar skill names.
 - Report all missing required dependencies in one concise English error.

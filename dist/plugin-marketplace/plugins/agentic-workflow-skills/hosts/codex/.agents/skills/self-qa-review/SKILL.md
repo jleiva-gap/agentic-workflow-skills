@@ -30,10 +30,10 @@ This workflow is a thin orchestrator. It uses the review skills shipped in this 
 
 Resolve `review_type` to one of the existing review skill packs:
 
-- `critical` -> `critical-review-agent`
-- `adversarial` -> `adversarial-review-agent`
-- `critical-adversarial` -> `critical-adversarial-review-agent`
-- `critical-with-validation` -> `critical-review-with-validation-agent`
+- `critical` -> `critical-review`
+- `adversarial` -> `adversarial-review`
+- `critical-adversarial` -> `critical-adversarial-review`
+- `critical-with-validation` -> `critical-review-with-validation`
 
 If `review_type` is missing and `review_file` is not supplied, ask one focused English question that offers those four choices. Do not guess.
 

@@ -1,6 +1,0 @@
-{
-  "name": "critical-adversarial-review-agent",
-  "description": "Use when a change needs one pass that checks both acceptance criteria and adversarial failure modes.",
-  "argumentHint": "<story-file> [repo-root] [output-dir] [base-ref] [review-scope] [agent-name] [run-tests] [output-mode] [token-budget]",
-  "allowImplicitInvocation": false
-}

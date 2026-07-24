@@ -1,6 +1,0 @@
-{
-  "name": "adversarial-review-agent",
-  "description": "Use when a change needs pressure testing for edge cases, abuse cases, regressions, and hidden failure modes.",
-  "argumentHint": "<story-file> [repo-root] [output-dir] [base-ref] [review-scope] [agent-name] [run-tests] [output-mode] [token-budget]",
-  "allowImplicitInvocation": false
-}

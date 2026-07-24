@@ -19,11 +19,11 @@ $skillNames = @(
     'create-handoff',
     'verify-handoff',
     'self-qa-review',
-    'critical-review-agent',
-    'adversarial-review-agent',
-    'critical-adversarial-review-agent',
-    'review-findings-validator-agent',
-    'critical-review-with-validation-agent'
+    'critical-review',
+    'adversarial-review',
+    'critical-adversarial-review',
+    'review-findings-validator',
+    'critical-review-with-validation'
 )
 
 function Write-Utf8NoBom {
@@ -130,7 +130,7 @@ function New-PluginManifestJson {
                 'Plan a story with story-to-plan.',
                 'Resume work with a process id.',
                 'Run self-QA review before handoff.',
-                'Use critical-review-with-validation-agent for strict review coverage.'
+                'Use critical-review-with-validation for strict review coverage.'
             )
             brandColor = '#2563EB'
         }

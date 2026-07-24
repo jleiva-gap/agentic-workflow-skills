@@ -1,7 +1,7 @@
 # Package Validation Report
 
-Generated: 2026-07-24T13:37:38.3859721-06:00
-Git commit: 535757b
+Generated: 2026-07-24T14:24:21.2504655-06:00
+Git commit: 820434d
 PowerShell: 7.6.3
 
 | Check | Status | Details |
@@ -39,16 +39,16 @@ PowerShell: 7.6.3
 | src\skills\verify-handoff\metadata.json | PASS | Present |
 | src\skills\self-qa-review\body.md | PASS | Present |
 | src\skills\self-qa-review\metadata.json | PASS | Present |
-| src\skills\critical-review-agent\body.md | PASS | Present |
-| src\skills\critical-review-agent\metadata.json | PASS | Present |
-| src\skills\adversarial-review-agent\body.md | PASS | Present |
-| src\skills\adversarial-review-agent\metadata.json | PASS | Present |
-| src\skills\critical-adversarial-review-agent\body.md | PASS | Present |
-| src\skills\critical-adversarial-review-agent\metadata.json | PASS | Present |
-| src\skills\review-findings-validator-agent\body.md | PASS | Present |
-| src\skills\review-findings-validator-agent\metadata.json | PASS | Present |
-| src\skills\critical-review-with-validation-agent\body.md | PASS | Present |
-| src\skills\critical-review-with-validation-agent\metadata.json | PASS | Present |
+| src\skills\critical-review\body.md | PASS | Present |
+| src\skills\critical-review\metadata.json | PASS | Present |
+| src\skills\adversarial-review\body.md | PASS | Present |
+| src\skills\adversarial-review\metadata.json | PASS | Present |
+| src\skills\critical-adversarial-review\body.md | PASS | Present |
+| src\skills\critical-adversarial-review\metadata.json | PASS | Present |
+| src\skills\review-findings-validator\body.md | PASS | Present |
+| src\skills\review-findings-validator\metadata.json | PASS | Present |
+| src\skills\critical-review-with-validation\body.md | PASS | Present |
+| src\skills\critical-review-with-validation\metadata.json | PASS | Present |
 | tests\scenarios\story-to-plan\01-minimal-valid-story-and-file-path.md | PASS | Present |
 | tests\scenarios\story-to-plan\02-inline-story-with-no-file.md | PASS | Present |
 | tests\scenarios\story-to-plan\03-missing-story-source.md | PASS | Present |
@@ -92,33 +92,33 @@ PowerShell: 7.6.3
 | tests\scenarios\verify-handoff\03-process-id-first-ux.md | PASS | Present |
 | tests\scenarios\self-qa-review\01-run-self-qa-review-and-create-remediation-handoff.md | PASS | Present |
 | tests\scenarios\self-qa-review\02-reuse-existing-findings-for-fix-back.md | PASS | Present |
-| tests\scenarios\critical-review-agent\01-static-review-only.md | PASS | Present |
-| tests\scenarios\adversarial-review-agent\01-pressure-test-edge-cases.md | PASS | Present |
-| tests\scenarios\critical-adversarial-review-agent\01-critical-plus-adversarial.md | PASS | Present |
-| tests\scenarios\review-findings-validator-agent\01-triage-an-existing-review.md | PASS | Present |
-| tests\scenarios\critical-review-with-validation-agent\01-critical-review-with-validation.md | PASS | Present |
+| tests\scenarios\critical-review\01-static-review-only.md | PASS | Present |
+| tests\scenarios\adversarial-review\01-pressure-test-edge-cases.md | PASS | Present |
+| tests\scenarios\critical-adversarial-review\01-critical-plus-adversarial.md | PASS | Present |
+| tests\scenarios\review-findings-validator\01-triage-an-existing-review.md | PASS | Present |
+| tests\scenarios\critical-review-with-validation\01-critical-review-with-validation.md | PASS | Present |
 | src\skills\story-to-plan\metadata.json | PASS | Valid canonical metadata |
 | src\skills\implement-approved-plan\metadata.json | PASS | Valid canonical metadata |
 | src\skills\resume-approved-plan\metadata.json | PASS | Valid canonical metadata |
 | src\skills\create-handoff\metadata.json | PASS | Valid canonical metadata |
 | src\skills\verify-handoff\metadata.json | PASS | Valid canonical metadata |
 | src\skills\self-qa-review\metadata.json | PASS | Valid canonical metadata |
-| src\skills\critical-review-agent\metadata.json | PASS | Valid canonical metadata |
-| src\skills\adversarial-review-agent\metadata.json | PASS | Valid canonical metadata |
-| src\skills\critical-adversarial-review-agent\metadata.json | PASS | Valid canonical metadata |
-| src\skills\review-findings-validator-agent\metadata.json | PASS | Valid canonical metadata |
-| src\skills\critical-review-with-validation-agent\metadata.json | PASS | Valid canonical metadata |
+| src\skills\critical-review\metadata.json | PASS | Valid canonical metadata |
+| src\skills\adversarial-review\metadata.json | PASS | Valid canonical metadata |
+| src\skills\critical-adversarial-review\metadata.json | PASS | Valid canonical metadata |
+| src\skills\review-findings-validator\metadata.json | PASS | Valid canonical metadata |
+| src\skills\critical-review-with-validation\metadata.json | PASS | Valid canonical metadata |
 | src\skills\story-to-plan\body.md | PASS | No placeholder tokens found |
 | src\skills\implement-approved-plan\body.md | PASS | No placeholder tokens found |
 | src\skills\resume-approved-plan\body.md | PASS | No placeholder tokens found |
 | src\skills\create-handoff\body.md | PASS | No placeholder tokens found |
 | src\skills\verify-handoff\body.md | PASS | No placeholder tokens found |
 | src\skills\self-qa-review\body.md | PASS | No placeholder tokens found |
-| src\skills\critical-review-agent\body.md | PASS | No placeholder tokens found |
-| src\skills\adversarial-review-agent\body.md | PASS | No placeholder tokens found |
-| src\skills\critical-adversarial-review-agent\body.md | PASS | No placeholder tokens found |
-| src\skills\review-findings-validator-agent\body.md | PASS | No placeholder tokens found |
-| src\skills\critical-review-with-validation-agent\body.md | PASS | No placeholder tokens found |
+| src\skills\critical-review\body.md | PASS | No placeholder tokens found |
+| src\skills\adversarial-review\body.md | PASS | No placeholder tokens found |
+| src\skills\critical-adversarial-review\body.md | PASS | No placeholder tokens found |
+| src\skills\review-findings-validator\body.md | PASS | No placeholder tokens found |
+| src\skills\critical-review-with-validation\body.md | PASS | No placeholder tokens found |
 | README.md | PASS | No placeholder tokens found |
 | AGENTS.md | PASS | No placeholder tokens found |
 | CHANGELOG.md | PASS | No placeholder tokens found |
@@ -138,5 +138,5 @@ PowerShell: 7.6.3
 - `pwsh ./scripts/Build-AgenticWorkflowPlugin.ps1 -Check`
 - `pwsh ./scripts/Invoke-BehavioralEvaluation.ps1 -Platform codex -Skill story-to-plan -Scenario 01-minimal-valid-story-and-file-path`
 - `pwsh ./scripts/Invoke-BehavioralEvaluation.ps1 -Platform codex -Skill self-qa-review -Scenario 01-run-self-qa-review-and-create-remediation-handoff`
-- `pwsh ./scripts/Invoke-BehavioralEvaluation.ps1 -Platform codex -Skill critical-review-with-validation-agent -Scenario 01-critical-review-with-validation`
+- `pwsh ./scripts/Invoke-BehavioralEvaluation.ps1 -Platform codex -Skill critical-review-with-validation -Scenario 01-critical-review-with-validation`
 

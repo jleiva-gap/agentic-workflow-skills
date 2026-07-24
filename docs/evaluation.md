@@ -22,11 +22,11 @@ Scenario markdown files live under:
 - `tests/scenarios/create-handoff/`
 - `tests/scenarios/verify-handoff/`
 - `tests/scenarios/self-qa-review/`
-- `tests/scenarios/critical-review-agent/`
-- `tests/scenarios/adversarial-review-agent/`
-- `tests/scenarios/critical-adversarial-review-agent/`
-- `tests/scenarios/review-findings-validator-agent/`
-- `tests/scenarios/critical-review-with-validation-agent/`
+- `tests/scenarios/critical-review/`
+- `tests/scenarios/adversarial-review/`
+- `tests/scenarios/critical-adversarial-review/`
+- `tests/scenarios/review-findings-validator/`
+- `tests/scenarios/critical-review-with-validation/`
 
 Each scenario should describe:
 
@@ -41,7 +41,7 @@ Use the scaffolded runner to record the evaluation request:
 
 ```powershell
 pwsh ./scripts/Invoke-BehavioralEvaluation.ps1 -Platform codex -Skill story-to-plan -Scenario 01-minimal-valid-story-and-file-path
-pwsh ./scripts/Invoke-BehavioralEvaluation.ps1 -Platform codex -Skill critical-review-with-validation-agent -Scenario 01-critical-review-with-validation
+pwsh ./scripts/Invoke-BehavioralEvaluation.ps1 -Platform codex -Skill critical-review-with-validation -Scenario 01-critical-review-with-validation
 ```
 
 If `-Scenario` is omitted, the runner lists the available scenarios for the selected skill.

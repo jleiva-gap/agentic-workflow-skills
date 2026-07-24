@@ -56,16 +56,16 @@ $requiredCanonical = @(
     'src\skills\verify-handoff\metadata.json',
     'src\skills\self-qa-review\body.md',
     'src\skills\self-qa-review\metadata.json',
-    'src\skills\critical-review-agent\body.md',
-    'src\skills\critical-review-agent\metadata.json',
-    'src\skills\adversarial-review-agent\body.md',
-    'src\skills\adversarial-review-agent\metadata.json',
-    'src\skills\critical-adversarial-review-agent\body.md',
-    'src\skills\critical-adversarial-review-agent\metadata.json',
-    'src\skills\review-findings-validator-agent\body.md',
-    'src\skills\review-findings-validator-agent\metadata.json',
-    'src\skills\critical-review-with-validation-agent\body.md',
-    'src\skills\critical-review-with-validation-agent\metadata.json'
+    'src\skills\critical-review\body.md',
+    'src\skills\critical-review\metadata.json',
+    'src\skills\adversarial-review\body.md',
+    'src\skills\adversarial-review\metadata.json',
+    'src\skills\critical-adversarial-review\body.md',
+    'src\skills\critical-adversarial-review\metadata.json',
+    'src\skills\review-findings-validator\body.md',
+    'src\skills\review-findings-validator\metadata.json',
+    'src\skills\critical-review-with-validation\body.md',
+    'src\skills\critical-review-with-validation\metadata.json'
 )
 $expectedScenarioFiles = @(
     'tests\scenarios\story-to-plan\01-minimal-valid-story-and-file-path.md',
@@ -111,11 +111,11 @@ $expectedScenarioFiles = @(
     'tests\scenarios\verify-handoff\03-process-id-first-ux.md',
     'tests\scenarios\self-qa-review\01-run-self-qa-review-and-create-remediation-handoff.md',
     'tests\scenarios\self-qa-review\02-reuse-existing-findings-for-fix-back.md',
-    'tests\scenarios\critical-review-agent\01-static-review-only.md',
-    'tests\scenarios\adversarial-review-agent\01-pressure-test-edge-cases.md',
-    'tests\scenarios\critical-adversarial-review-agent\01-critical-plus-adversarial.md',
-    'tests\scenarios\review-findings-validator-agent\01-triage-an-existing-review.md',
-    'tests\scenarios\critical-review-with-validation-agent\01-critical-review-with-validation.md'
+    'tests\scenarios\critical-review\01-static-review-only.md',
+    'tests\scenarios\adversarial-review\01-pressure-test-edge-cases.md',
+    'tests\scenarios\critical-adversarial-review\01-critical-plus-adversarial.md',
+    'tests\scenarios\review-findings-validator\01-triage-an-existing-review.md',
+    'tests\scenarios\critical-review-with-validation\01-critical-review-with-validation.md'
 )
 
 function New-Result {
@@ -201,7 +201,7 @@ function Write-Report {
     $lines += '- `pwsh ./scripts/Build-AgenticWorkflowPlugin.ps1 -Check`'
     $lines += '- `pwsh ./scripts/Invoke-BehavioralEvaluation.ps1 -Platform codex -Skill story-to-plan -Scenario 01-minimal-valid-story-and-file-path`'
     $lines += '- `pwsh ./scripts/Invoke-BehavioralEvaluation.ps1 -Platform codex -Skill self-qa-review -Scenario 01-run-self-qa-review-and-create-remediation-handoff`'
-    $lines += '- `pwsh ./scripts/Invoke-BehavioralEvaluation.ps1 -Platform codex -Skill critical-review-with-validation-agent -Scenario 01-critical-review-with-validation`'
+    $lines += '- `pwsh ./scripts/Invoke-BehavioralEvaluation.ps1 -Platform codex -Skill critical-review-with-validation -Scenario 01-critical-review-with-validation`'
     $lines += ''
     try {
         Set-Content -LiteralPath $reportPath -Value ($lines -join "`n") -Encoding utf8
@@ -250,11 +250,11 @@ try {
         'src\skills\create-handoff\metadata.json',
         'src\skills\verify-handoff\metadata.json',
         'src\skills\self-qa-review\metadata.json',
-        'src\skills\critical-review-agent\metadata.json',
-        'src\skills\adversarial-review-agent\metadata.json',
-        'src\skills\critical-adversarial-review-agent\metadata.json',
-        'src\skills\review-findings-validator-agent\metadata.json',
-        'src\skills\critical-review-with-validation-agent\metadata.json'
+        'src\skills\critical-review\metadata.json',
+        'src\skills\adversarial-review\metadata.json',
+        'src\skills\critical-adversarial-review\metadata.json',
+        'src\skills\review-findings-validator\metadata.json',
+        'src\skills\critical-review-with-validation\metadata.json'
     )) {
         try {
             $name = Split-Path -Leaf (Split-Path -Parent $relative)
@@ -273,11 +273,11 @@ try {
         'src\skills\create-handoff\body.md',
         'src\skills\verify-handoff\body.md',
         'src\skills\self-qa-review\body.md',
-        'src\skills\critical-review-agent\body.md',
-        'src\skills\adversarial-review-agent\body.md',
-        'src\skills\critical-adversarial-review-agent\body.md',
-        'src\skills\review-findings-validator-agent\body.md',
-        'src\skills\critical-review-with-validation-agent\body.md',
+        'src\skills\critical-review\body.md',
+        'src\skills\adversarial-review\body.md',
+        'src\skills\critical-adversarial-review\body.md',
+        'src\skills\review-findings-validator\body.md',
+        'src\skills\critical-review-with-validation\body.md',
         'README.md',
         'AGENTS.md',
         'CHANGELOG.md',

@@ -47,6 +47,11 @@ Use the process id as the default input for `create-handoff`, `verify-handoff`, 
 - `verify-handoff`: check whether a handoff is still safe to reuse
 - `resume-approved-plan`: continue from an approved plan after interruption or transfer
 - `self-qa-review`: run a review variant and turn findings into a remediation handoff when needed
+- `critical-review`: perform a strict evidence-based review
+- `adversarial-review`: challenge assumptions, edge cases, and hidden regressions
+- `critical-adversarial-review`: combine strict evidence checks with adversarial pressure
+- `review-findings-validator`: validate, deduplicate, or downgrade findings from another review
+- `critical-review-with-validation`: run a strict review and a validator pass before handing off findings
 
 ## The standard flow
 
@@ -198,9 +203,11 @@ If the findings point to a fix that needs replanning, feed the findings report i
 
 Typical review options:
 
-- `requesting-code-review` for a structured code review pass
-- `critical-review-agent` for a strict evidence-based review
-- `critical-review-with-validation-agent` when you want a second-pass validator
+- `critical-review` for a strict evidence-based review
+- `adversarial-review` for a challenge-oriented pass that hunts edge cases and regressions
+- `critical-adversarial-review` when you want both strictness and adversarial pressure
+- `review-findings-validator` when you need a second opinion on findings already produced
+- `critical-review-with-validation` when you want a strict review followed by validation
 - `self-qa-review` when you want the review pass to lead into a fix-back checkpoint
 
 Example:

@@ -19,14 +19,14 @@ If `story_source` is missing, first look for `.plans/<story-id>.md`. If that fil
 3. Inspect repository context, relevant docs, source, tests, and nearby changes.
 4. Extract explicit acceptance criteria.
 5. Identify assumptions, hidden constraints, compatibility issues, security implications, and open questions.
-6. Invoke `superpowers:brainstorming` before any design is finalized.
+6. Invoke `orion:brainstorming` when the host exposes the Orion namespace, otherwise invoke `superpowers:brainstorming`, before any design is finalized.
 7. Ask one focused English question at a time when clarification is required.
 8. Propose two or three viable approaches with trade-offs and a recommendation.
 9. Present the design incrementally and stop for user approval.
 10. Write the design specification only after design approval.
 11. Run the Superpowers specification self-review and fix anything that is vague, contradictory, or incomplete.
 12. Stop for user review of the written spec.
-13. After the written spec is approved, invoke `superpowers:writing-plans`.
+13. After the written spec is approved, invoke `orion:writing-plans` when the host exposes the Orion namespace, otherwise invoke `superpowers:writing-plans`.
 14. Write the implementation plan and the handoff artifact using the bundled templates under `templates/`.
 15. Stop after reporting the generated artifact paths.
 

@@ -28,7 +28,7 @@
       "Plan a story with story-to-plan.",
       "Resume work with a process id.",
       "Run self-QA review before handoff.",
-      "Use critical-review-with-validation-agent for strict review coverage."
+      "Use critical-review-with-validation for strict review coverage."
     ],
     "brandColor": "#2563EB"
   }

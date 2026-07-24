@@ -20,11 +20,11 @@ Use this guide when changing the canonical skills or the shared contracts.
 - `src/skills/create-handoff/` contains the handoff capture skill.
 - `src/skills/verify-handoff/` contains the handoff verification skill.
 - `src/skills/self-qa-review/` contains the self-QA and remediation handoff skill.
-- `src/skills/critical-review-agent/` contains the strict review skill.
-- `src/skills/adversarial-review-agent/` contains the pressure-test review skill.
-- `src/skills/critical-adversarial-review-agent/` contains the combined review skill.
-- `src/skills/review-findings-validator-agent/` contains the findings validator skill.
-- `src/skills/critical-review-with-validation-agent/` contains the two-pass critical review skill.
+- `src/skills/critical-review/` contains the strict review skill.
+- `src/skills/adversarial-review/` contains the pressure-test review skill.
+- `src/skills/critical-adversarial-review/` contains the combined review skill.
+- `src/skills/review-findings-validator/` contains the findings validator skill.
+- `src/skills/critical-review-with-validation/` contains the two-pass critical review skill.
 
 ## When to update shared references
 
