@@ -1,0 +1,6 @@
+{
+  "name": "critical-review-with-validation-agent",
+  "description": "Use when a change needs a strict critical review followed by validation of the resulting findings.",
+  "argumentHint": "<story-file> [repo-root] [output-dir] [base-ref] [review-scope] [agent-name] [run-tests] [output-mode] [token-budget]",
+  "allowImplicitInvocation": false
+}

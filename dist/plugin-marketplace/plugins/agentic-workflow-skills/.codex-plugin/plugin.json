@@ -1,0 +1,35 @@
+{
+  "name": "agentic-workflow-skills",
+  "version": "0.1.0",
+  "description": "Agentic workflow skills for planning, implementation, resume, handoff, verification, and review.",
+  "author": {
+    "name": "Agentic Workflow Skills Contributors"
+  },
+  "license": "Apache-2.0",
+  "keywords": [
+    "agentic-workflow",
+    "skills",
+    "planning",
+    "handoff",
+    "review",
+    "self-qa"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Agentic Workflow Skills",
+    "shortDescription": "Reusable workflow skills for artifact-driven delivery.",
+    "longDescription": "Planning, implementation, handoff, resume, verification, and review workflows packaged as a local Codex plugin.",
+    "developerName": "Agentic Workflow Skills Contributors",
+    "category": "Productivity",
+    "capabilities": [
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Plan a story with story-to-plan.",
+      "Resume work with a process id.",
+      "Run self-QA review before handoff.",
+      "Use critical-review-with-validation-agent for strict review coverage."
+    ],
+    "brandColor": "#2563EB"
+  }
+}

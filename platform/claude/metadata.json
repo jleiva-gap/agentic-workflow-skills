@@ -1,0 +1,19 @@
+{
+  "host": "claude",
+  "distributionRoot": ".claude/skills",
+  "skillFileName": "SKILL.md",
+  "supports": {
+    "allowImplicitInvocation": false,
+    "argumentHint": true,
+    "userInvocable": true,
+    "disableModelInvocation": true
+  },
+  "invocationExamples": [
+    "/story-to-plan story_id=DMS-1228 story_source=.plans/DMS-1228.md",
+    "/implement-approved-plan docs/superpowers/plans/2026-07-17-DMS-1228.md",
+    "/resume-approved-plan process_id=2026-07-17-DMS-1228",
+    "/create-handoff process_id=2026-07-17-DMS-1228",
+    "/verify-handoff process_id=2026-07-17-DMS-1228",
+    "/self-qa-review story_file=.plans/DMS-1228.md review_type=critical-with-validation"
+  ]
+}
