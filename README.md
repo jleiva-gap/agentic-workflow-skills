@@ -84,7 +84,7 @@ agentic-workflow-skills/
 
 ## Install
 
-Install from the published GitHub Pages site using the host you want to run:
+Install from the marketplace repository using the host you want to run:
 
 ```mermaid
 flowchart TB
@@ -103,7 +103,7 @@ flowchart TB
 ### Codex
 
 ```powershell
-codex plugin marketplace add "https://jleiva-gap.github.io/agentic-workflow-skills/marketplace.json"
+codex plugin marketplace add "https://github.com/jleiva-gap/agentic-workflow-skills-marketplace"
 codex plugin add agentic-workflow-skills@agentic-workflow-skills-local
 ```
 
@@ -112,18 +112,19 @@ Start a new Codex thread after installation so the plugin skills are loaded.
 ### GitHub Copilot CLI
 
 ```powershell
-copilot plugin marketplace add "https://jleiva-gap.github.io/agentic-workflow-skills/hosts/copilot-marketplace/marketplace.json"
+copilot plugin marketplace add "https://github.com/jleiva-gap/agentic-workflow-skills-marketplace"
 copilot plugin install agentic-workflow-skills@agentic-workflow-skills-local
 ```
 
 ### Claude Code
 
 ```powershell
-claude plugin marketplace add "https://jleiva-gap.github.io/agentic-workflow-skills/hosts/claude-marketplace/.claude-plugin/marketplace.json"
+claude plugin marketplace add "https://github.com/jleiva-gap/agentic-workflow-skills-marketplace"
 claude plugin install agentic-workflow-skills@agentic-workflow-skills-local
 ```
 
-These commands point at the generated marketplace JSON files published from GitHub Pages.
+These commands point all three hosts at the repository root. Each host discovers its own
+marketplace manifest and plugin manifest from that root.
 
 For rebuild, validation, local install, and packaging steps, see [docs/developer-guide.md](docs/developer-guide.md).
 

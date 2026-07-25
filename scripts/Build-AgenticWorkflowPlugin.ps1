@@ -171,7 +171,7 @@ function New-CopilotPluginManifestJson {
     return ($manifest | ConvertTo-Json -Depth 20)
 }
 
-function New-MarketplaceJson {
+function New-CodexMarketplaceJson {
     $marketplace = [ordered]@{
         name = $marketplaceName
         interface = [ordered]@{
@@ -181,8 +181,8 @@ function New-MarketplaceJson {
             [ordered]@{
                 name = $pluginName
                 source = [ordered]@{
-                    source = 'local'
-                    path = './plugins/agentic-workflow-skills'
+                    source = 'url'
+                    url = './plugins/agentic-workflow-skills'
                 }
                 policy = [ordered]@{
                     installation = 'AVAILABLE'
@@ -196,7 +196,9 @@ function New-MarketplaceJson {
     return ($marketplace | ConvertTo-Json -Depth 20)
 }
 
-function New-ClaudeMarketplaceJson {
+function New-RemoteMarketplaceJson {
+    param([string]$PluginSource = './hosts/claude-marketplace/plugins/agentic-workflow-skills')
+
     $marketplace = [ordered]@{
         name = $marketplaceName
         owner = [ordered]@{
@@ -206,7 +208,7 @@ function New-ClaudeMarketplaceJson {
         plugins = @(
             [ordered]@{
                 name = $pluginName
-                source = './plugins/agentic-workflow-skills'
+                source = $PluginSource
                 description = 'Agentic workflow skills for planning, implementation, resume, handoff, verification, and self-QA review.'
                 version = '0.1.0'
                 author = [ordered]@{
@@ -220,23 +222,23 @@ function New-ClaudeMarketplaceJson {
 }
 
 function New-CopilotMarketplaceJson {
+    param([string]$PluginSource = './hosts/copilot-marketplace/plugins/agentic-workflow-skills')
+
     $marketplace = [ordered]@{
         name = $marketplaceName
-        interface = [ordered]@{
-            displayName = 'Agentic Workflow Skills Local'
+        owner = [ordered]@{
+            name = 'Agentic Workflow Skills Contributors'
         }
+        description = 'Marketplace for Agentic Workflow Skills.'
         plugins = @(
             [ordered]@{
                 name = $pluginName
-                source = [ordered]@{
-                    source = 'local'
-                    path = './plugins/agentic-workflow-skills'
+                source = $PluginSource
+                description = 'Agentic workflow skills for planning, implementation, resume, handoff, verification, and review.'
+                version = '0.1.0'
+                author = [ordered]@{
+                    name = 'Agentic Workflow Skills Contributors'
                 }
-                policy = [ordered]@{
-                    installation = 'AVAILABLE'
-                    authentication = 'ON_INSTALL'
-                }
-                category = 'Productivity'
             }
         )
     }
@@ -288,11 +290,15 @@ function Write-PluginMarketplace {
     Assert-ExpectedSkillsPresent -SkillRoot (Join-Path $copilotMarketplacePluginRoot 'skills')
 
     Write-Utf8NoBom -Path (Join-Path $pluginRoot '.codex-plugin\plugin.json') -Content (New-PluginManifestJson)
-    Write-Utf8NoBom -Path (Join-Path $marketplaceRoot 'marketplace.json') -Content (New-MarketplaceJson)
+    Write-Utf8NoBom -Path (Join-Path $pluginRoot '.claude-plugin\plugin.json') -Content (New-ClaudePluginManifestJson)
+    Write-Utf8NoBom -Path (Join-Path $pluginRoot 'plugin.json') -Content (New-CopilotPluginManifestJson)
+    Write-Utf8NoBom -Path (Join-Path $marketplaceRoot 'marketplace.json') -Content (New-CopilotMarketplaceJson)
+    Write-Utf8NoBom -Path (Join-Path $marketplaceRoot '.agents\plugins\marketplace.json') -Content (New-CodexMarketplaceJson)
+    Write-Utf8NoBom -Path (Join-Path $marketplaceRoot '.claude-plugin\marketplace.json') -Content (New-RemoteMarketplaceJson)
     Write-Utf8NoBom -Path (Join-Path $claudeMarketplacePluginRoot '.claude-plugin\plugin.json') -Content (New-ClaudePluginManifestJson)
-    Write-Utf8NoBom -Path (Join-Path $marketplaceRoot 'hosts\claude-marketplace\.claude-plugin\marketplace.json') -Content (New-ClaudeMarketplaceJson)
+    Write-Utf8NoBom -Path (Join-Path $marketplaceRoot 'hosts\claude-marketplace\.claude-plugin\marketplace.json') -Content (New-RemoteMarketplaceJson -PluginSource './plugins/agentic-workflow-skills')
     Write-Utf8NoBom -Path (Join-Path $copilotMarketplacePluginRoot 'plugin.json') -Content (New-CopilotPluginManifestJson)
-    Write-Utf8NoBom -Path (Join-Path $marketplaceRoot 'hosts\copilot-marketplace\marketplace.json') -Content (New-CopilotMarketplaceJson)
+    Write-Utf8NoBom -Path (Join-Path $marketplaceRoot 'hosts\copilot-marketplace\marketplace.json') -Content (New-CopilotMarketplaceJson -PluginSource './plugins/agentic-workflow-skills')
 }
 
 try {

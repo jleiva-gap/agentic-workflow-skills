@@ -96,11 +96,12 @@ The published marketplace files come from GitHub Actions and are hosted by GitHu
 
 Before the first publish, set the repository's Pages source to `GitHub Actions` in GitHub Settings so the deployment workflow can initialize the site.
 
-The install URLs should point at:
+The marketplace repository URL is:
 
-- `https://jleiva-gap.github.io/agentic-workflow-skills/marketplace.json`
-- `https://jleiva-gap.github.io/agentic-workflow-skills/hosts/copilot-marketplace/marketplace.json`
-- `https://jleiva-gap.github.io/agentic-workflow-skills/hosts/claude-marketplace/.claude-plugin/marketplace.json`
+- `https://github.com/jleiva-gap/agentic-workflow-skills-marketplace`
+
+The repository root contains the host-specific discovery manifests required by Codex, Claude
+Code, and GitHub Copilot CLI.
 
 To prepare marketplace install commands from the local repository configuration:
 

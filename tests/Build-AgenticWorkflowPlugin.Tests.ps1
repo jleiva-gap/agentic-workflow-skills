@@ -39,14 +39,24 @@ Describe 'Build-AgenticWorkflowPlugin.ps1' {
         try {
             (Invoke-PluginBuild -PackageCopy $copy) | Should -Be 0
             $marketplace = Join-Path $copy 'dist\plugin-marketplace\marketplace.json'
+            $codexMarketplace = Join-Path $copy 'dist\plugin-marketplace\.agents\plugins\marketplace.json'
             $manifest = Join-Path $copy 'dist\plugin-marketplace\plugins\agentic-workflow-skills\.codex-plugin\plugin.json'
             (Test-Path $marketplace) | Should -BeTrue
+            (Test-Path $codexMarketplace) | Should -BeTrue
             (Test-Path $manifest) | Should -BeTrue
 
             $plugin = Get-Content -Raw -LiteralPath $manifest | ConvertFrom-Json
             $plugin.name | Should -Be 'agentic-workflow-skills'
             $plugin.skills | Should -Be './skills/'
             $plugin.interface.displayName | Should -Be 'Agentic Workflow Skills'
+
+            $codex = Get-Content -Raw -LiteralPath $codexMarketplace | ConvertFrom-Json
+            $codex.plugins[0].source.source | Should -Be 'url'
+            $codex.plugins[0].source.url | Should -Be './plugins/agentic-workflow-skills'
+
+            $remote = Get-Content -Raw -LiteralPath $marketplace | ConvertFrom-Json
+            $remote.owner.name | Should -Be 'Agentic Workflow Skills Contributors'
+            $remote.plugins[0].source | Should -Be './hosts/copilot-marketplace/plugins/agentic-workflow-skills'
         } finally {
             Remove-TestPath -Path $copy
         }
@@ -81,6 +91,9 @@ Describe 'Build-AgenticWorkflowPlugin.ps1' {
             (Test-Path $claudeManifest) | Should -BeTrue
             (Test-Path $copilotMarketplace) | Should -BeTrue
             (Test-Path $copilotManifest) | Should -BeTrue
+            (Test-Path (Join-Path $bundleRoot '.claude-plugin\marketplace.json')) | Should -BeTrue
+            (Test-Path (Join-Path $bundleRoot 'plugins\agentic-workflow-skills\.claude-plugin\plugin.json')) | Should -BeTrue
+            (Test-Path (Join-Path $bundleRoot 'plugins\agentic-workflow-skills\plugin.json')) | Should -BeTrue
 
             @(Get-ChildItem -LiteralPath (Join-Path $bundleRoot 'hosts\claude-marketplace\plugins\agentic-workflow-skills\skills') -Directory).Count | Should -Be 11
             @(Get-ChildItem -LiteralPath (Join-Path $bundleRoot 'hosts\copilot-marketplace\plugins\agentic-workflow-skills\skills') -Directory).Count | Should -Be 11
