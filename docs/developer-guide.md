@@ -81,6 +81,7 @@ The generated plugin bundle is written to `dist/plugin-marketplace/`.
 It includes:
 
 - `marketplace.json` for Codex marketplace registration;
+- a repository-root Codex plugin mirror with `.codex-plugin/plugin.json` and `skills/`;
 - `plugins/agentic-workflow-skills/.codex-plugin/plugin.json`;
 - `plugins/agentic-workflow-skills/skills/` with all eleven Codex skills;
 - `plugins/agentic-workflow-skills/hosts/copilot/.github/skills/`;

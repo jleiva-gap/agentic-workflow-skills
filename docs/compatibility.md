@@ -15,7 +15,7 @@ This package is designed for Windows-first automation with PowerShell 7+.
 - GitHub Copilot
 - Claude Code
 
-Codex can consume the generated local plugin marketplace bundle under `dist/plugin-marketplace/`. For remote installation, use the repository root `https://github.com/jleiva-gap/agentic-workflow-skills-marketplace` with all three hosts. Codex discovers `.agents/plugins/marketplace.json`, Claude Code discovers `.claude-plugin/marketplace.json`, and GitHub Copilot CLI discovers the repository-root `marketplace.json`.
+Codex can consume the generated local plugin marketplace bundle under `dist/plugin-marketplace/`. For remote installation, use the repository root `https://github.com/jleiva-gap/agentic-workflow-skills-marketplace` with all three hosts. Codex discovers `.agents/plugins/marketplace.json` and installs the plugin from the marketplace repository root, Claude Code discovers `.claude-plugin/marketplace.json`, and GitHub Copilot CLI discovers the repository-root `marketplace.json`.
 
 The host overlays in `platform/` control the generated frontmatter and invocation metadata for each host. That is the adapter layer: canonical workflow behavior stays in `src/`, while the host wrapper changes only how the skill is invoked.
 

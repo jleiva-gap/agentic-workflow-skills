@@ -172,6 +172,8 @@ function New-CopilotPluginManifestJson {
 }
 
 function New-CodexMarketplaceJson {
+    param([string]$PluginSource = './')
+
     $marketplace = [ordered]@{
         name = $marketplaceName
         interface = [ordered]@{
@@ -182,7 +184,7 @@ function New-CodexMarketplaceJson {
                 name = $pluginName
                 source = [ordered]@{
                     source = 'url'
-                    url = './plugins/agentic-workflow-skills'
+                    url = $PluginSource
                 }
                 policy = [ordered]@{
                     installation = 'AVAILABLE'
@@ -274,6 +276,7 @@ function Write-PluginMarketplace {
 
     Copy-DirectoryContents -SourceRoot $codexSkillRoot -TargetRoot (Join-Path $pluginRoot 'skills')
     Copy-DirectoryContents -SourceRoot $codexSkillRoot -TargetRoot (Join-Path $pluginRoot 'hosts\codex\.agents\skills')
+    Copy-DirectoryContents -SourceRoot $codexSkillRoot -TargetRoot (Join-Path $marketplaceRoot 'skills')
     Copy-DirectoryContents -SourceRoot $copilotSkillRoot -TargetRoot (Join-Path $pluginRoot 'hosts\copilot\.github\skills')
     Copy-DirectoryContents -SourceRoot $claudeSkillRoot -TargetRoot (Join-Path $pluginRoot 'hosts\claude\.claude\skills')
 
@@ -284,11 +287,13 @@ function Write-PluginMarketplace {
 
     Assert-ExpectedSkillsPresent -SkillRoot (Join-Path $pluginRoot 'skills')
     Assert-ExpectedSkillsPresent -SkillRoot (Join-Path $pluginRoot 'hosts\codex\.agents\skills')
+    Assert-ExpectedSkillsPresent -SkillRoot (Join-Path $marketplaceRoot 'skills')
     Assert-ExpectedSkillsPresent -SkillRoot (Join-Path $pluginRoot 'hosts\copilot\.github\skills')
     Assert-ExpectedSkillsPresent -SkillRoot (Join-Path $pluginRoot 'hosts\claude\.claude\skills')
     Assert-ExpectedSkillsPresent -SkillRoot (Join-Path $claudeMarketplacePluginRoot 'skills')
     Assert-ExpectedSkillsPresent -SkillRoot (Join-Path $copilotMarketplacePluginRoot 'skills')
 
+    Write-Utf8NoBom -Path (Join-Path $marketplaceRoot '.codex-plugin\plugin.json') -Content (New-PluginManifestJson)
     Write-Utf8NoBom -Path (Join-Path $pluginRoot '.codex-plugin\plugin.json') -Content (New-PluginManifestJson)
     Write-Utf8NoBom -Path (Join-Path $pluginRoot '.claude-plugin\plugin.json') -Content (New-ClaudePluginManifestJson)
     Write-Utf8NoBom -Path (Join-Path $pluginRoot 'plugin.json') -Content (New-CopilotPluginManifestJson)

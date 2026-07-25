@@ -352,6 +352,9 @@ try {
     }
 
     if (Test-Path -LiteralPath $pluginMarketplaceRoot) {
+        $codexMarketplace = Join-Path $pluginMarketplaceRoot '.agents\plugins\marketplace.json'
+        $codexRootManifest = Join-Path $pluginMarketplaceRoot '.codex-plugin\plugin.json'
+        $codexRootSkillRoot = Join-Path $pluginMarketplaceRoot 'skills'
         $pluginManifest = Join-Path $pluginMarketplaceRoot 'plugins\agentic-workflow-skills\.codex-plugin\plugin.json'
         $marketplace = Join-Path $pluginMarketplaceRoot 'marketplace.json'
         $codexPluginSkillRoot = Join-Path $pluginMarketplaceRoot 'plugins\agentic-workflow-skills\skills'
@@ -364,13 +367,26 @@ try {
 
         try {
             if (-not (Test-Path $marketplace)) { throw "Missing marketplace file: $marketplace" }
+            if (-not (Test-Path $codexMarketplace)) { throw "Missing Codex marketplace file: $codexMarketplace" }
+            if (-not (Test-Path $codexRootManifest)) { throw "Missing Codex root plugin manifest: $codexRootManifest" }
             if (-not (Test-Path $pluginManifest)) { throw "Missing plugin manifest: $pluginManifest" }
             if (-not (Test-Path $claudeMarketplace)) { throw "Missing Claude marketplace file: $claudeMarketplace" }
             if (-not (Test-Path $copilotMarketplace)) { throw "Missing Copilot marketplace file: $copilotMarketplace" }
 
+            $codexMarketplaceContent = Get-Content -Raw -LiteralPath $codexMarketplace | ConvertFrom-Json
+            if ($codexMarketplaceContent.plugins[0].source.url -ne './') { throw 'Codex marketplace source must point at the repository root.' }
+
             $manifest = Get-Content -Raw -LiteralPath $pluginManifest | ConvertFrom-Json
             if ($manifest.name -ne 'agentic-workflow-skills') { throw 'Plugin manifest name mismatch.' }
             if ($manifest.skills -ne './skills/') { throw 'Plugin manifest skills path must be ./skills/.' }
+
+            $codexRootManifestContent = Get-Content -Raw -LiteralPath $codexRootManifest | ConvertFrom-Json
+            if ($codexRootManifestContent.name -ne 'agentic-workflow-skills') { throw 'Codex root plugin manifest name mismatch.' }
+            if ($codexRootManifestContent.skills -ne './skills/') { throw 'Codex root plugin manifest skills path must be ./skills/.' }
+
+            $codexRootSkills = @(Get-ChildItem -LiteralPath $codexRootSkillRoot -Directory)
+            if ($codexRootSkills.Count -ne 11) { throw "Expected 11 plugin skills under $codexRootSkillRoot, found $($codexRootSkills.Count)." }
+            if ('self-qa-review' -notin $codexRootSkills.Name) { throw "self-qa-review missing under $codexRootSkillRoot." }
 
             foreach ($root in @($codexPluginSkillRoot, $copilotPluginSkillRoot, $claudePluginSkillRoot, $claudeMarketplaceSkillRoot, $copilotMarketplaceSkillRoot)) {
                 $skills = @(Get-ChildItem -LiteralPath $root -Directory)
@@ -378,7 +394,7 @@ try {
                 if ('self-qa-review' -notin $skills.Name) { throw "self-qa-review missing under $root." }
             }
 
-            $rows.Add((New-Result 'plugin layout' 'PASS' 'Codex, Claude, and Copilot plugin manifests and host skill bundles present'))
+            $rows.Add((New-Result 'plugin layout' 'PASS' 'Codex root, Claude, and Copilot plugin manifests and host skill bundles present'))
         } catch {
             $failed = $true
             $rows.Add((New-Result 'plugin layout' 'FAIL' $_.Exception.Message))

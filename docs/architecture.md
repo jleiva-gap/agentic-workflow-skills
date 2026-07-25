@@ -70,6 +70,7 @@ Each generated skill directory is self-contained:
 - `templates/`
 
 The plugin bundle is also generated from the same source. It contains a Codex `.codex-plugin/plugin.json`, a local marketplace file, host-specific Claude/Copilot direct skill trees, and host-specific Claude/Copilot marketplace roots for plugin-manager installation.
+For Codex remote installation, the generated marketplace repository also mirrors the Codex plugin bundle at the repository root so the plugin manager can clone a git repository rather than a non-git subdirectory.
 
 ## Script responsibilities
 

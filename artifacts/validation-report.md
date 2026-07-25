@@ -1,7 +1,7 @@
 # Package Validation Report
 
-Generated: 2026-07-24T18:36:50.6212918-06:00
-Git commit: 8772a8b
+Generated: 2026-07-24T19:05:10.1354117-06:00
+Git commit: e40a4f2
 PowerShell: 7.6.3
 
 | Check | Status | Details |
@@ -126,10 +126,11 @@ PowerShell: 7.6.3
 | docs\compatibility.md | PASS | No placeholder tokens found |
 | docs\authoring.md | PASS | No placeholder tokens found |
 | docs\evaluation.md | PASS | No placeholder tokens found |
-| dist layout | SKIP | dist/ is not present yet. |
-| Build-SkillDistributions.ps1 -Check | SKIP | dist/ is not present yet. |
-| plugin layout | SKIP | dist/plugin-marketplace is not present yet. |
-| Build-AgenticWorkflowPlugin.ps1 -Check | SKIP | dist/plugin-marketplace is not present yet. |
+| dist layout | PASS | 33 generated skill files found |
+| dist support files | PASS | Shared references and templates packaged with every generated skill |
+| Build-SkillDistributions.ps1 -Check | SKIP | Run with -Check to compare generated distributions. |
+| plugin layout | PASS | Codex root, Claude, and Copilot plugin manifests and host skill bundles present |
+| Build-AgenticWorkflowPlugin.ps1 -Check | SKIP | Run with -Check to compare generated plugin bundle. |
 
 ## Commands
 

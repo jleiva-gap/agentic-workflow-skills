@@ -41,18 +41,24 @@ Describe 'Build-AgenticWorkflowPlugin.ps1' {
             $marketplace = Join-Path $copy 'dist\plugin-marketplace\marketplace.json'
             $codexMarketplace = Join-Path $copy 'dist\plugin-marketplace\.agents\plugins\marketplace.json'
             $manifest = Join-Path $copy 'dist\plugin-marketplace\plugins\agentic-workflow-skills\.codex-plugin\plugin.json'
+            $rootManifest = Join-Path $copy 'dist\plugin-marketplace\.codex-plugin\plugin.json'
             (Test-Path $marketplace) | Should -BeTrue
             (Test-Path $codexMarketplace) | Should -BeTrue
             (Test-Path $manifest) | Should -BeTrue
+            (Test-Path $rootManifest) | Should -BeTrue
 
             $plugin = Get-Content -Raw -LiteralPath $manifest | ConvertFrom-Json
             $plugin.name | Should -Be 'agentic-workflow-skills'
             $plugin.skills | Should -Be './skills/'
             $plugin.interface.displayName | Should -Be 'Agentic Workflow Skills'
 
+            $rootPlugin = Get-Content -Raw -LiteralPath $rootManifest | ConvertFrom-Json
+            $rootPlugin.name | Should -Be 'agentic-workflow-skills'
+            $rootPlugin.skills | Should -Be './skills/'
+
             $codex = Get-Content -Raw -LiteralPath $codexMarketplace | ConvertFrom-Json
             $codex.plugins[0].source.source | Should -Be 'url'
-            $codex.plugins[0].source.url | Should -Be './plugins/agentic-workflow-skills'
+            $codex.plugins[0].source.url | Should -Be './'
 
             $remote = Get-Content -Raw -LiteralPath $marketplace | ConvertFrom-Json
             $remote.owner.name | Should -Be 'Agentic Workflow Skills Contributors'
@@ -94,9 +100,12 @@ Describe 'Build-AgenticWorkflowPlugin.ps1' {
             (Test-Path (Join-Path $bundleRoot '.claude-plugin\marketplace.json')) | Should -BeTrue
             (Test-Path (Join-Path $bundleRoot 'plugins\agentic-workflow-skills\.claude-plugin\plugin.json')) | Should -BeTrue
             (Test-Path (Join-Path $bundleRoot 'plugins\agentic-workflow-skills\plugin.json')) | Should -BeTrue
+            (Test-Path (Join-Path $bundleRoot '.codex-plugin\plugin.json')) | Should -BeTrue
+            (Test-Path (Join-Path $bundleRoot 'skills')) | Should -BeTrue
 
             @(Get-ChildItem -LiteralPath (Join-Path $bundleRoot 'hosts\claude-marketplace\plugins\agentic-workflow-skills\skills') -Directory).Count | Should -Be 11
             @(Get-ChildItem -LiteralPath (Join-Path $bundleRoot 'hosts\copilot-marketplace\plugins\agentic-workflow-skills\skills') -Directory).Count | Should -Be 11
+            @(Get-ChildItem -LiteralPath (Join-Path $bundleRoot 'skills') -Directory).Count | Should -Be 11
         } finally {
             Remove-TestPath -Path $copy
         }

@@ -105,6 +105,9 @@ graph TD
 
 ```powershell
 codex plugin marketplace add "https://github.com/jleiva-gap/agentic-workflow-skills-marketplace"
+```
+
+```powershell
 codex plugin add agentic-workflow-skills@agentic-workflow-skills-local
 ```
 
@@ -114,14 +117,20 @@ Start a new Codex thread after installation so the plugin skills are loaded.
 
 ```powershell
 copilot plugin marketplace add "https://github.com/jleiva-gap/agentic-workflow-skills-marketplace"
-copilot plugin install agentic-workflow-skills@agentic-workflow-skills-local
+```
+
+```powershell
+copilot plugin install agentic-workflow-skills@agentic-workflow-skills-local --scope project
 ```
 
 ### Claude Code
 
 ```powershell
 claude plugin marketplace add "https://github.com/jleiva-gap/agentic-workflow-skills-marketplace"
-claude plugin install agentic-workflow-skills@agentic-workflow-skills-local
+```
+
+```powershell
+claude plugin install agentic-workflow-skills@agentic-workflow-skills-local --scope project
 ```
 
 All three hosts use the same marketplace repository URL. The remote install command clones that repository, then the host-specific install command selects the `agentic-workflow-skills` package from the generated marketplace metadata.
