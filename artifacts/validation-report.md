@@ -126,11 +126,10 @@ PowerShell: 7.6.3
 | docs\compatibility.md | PASS | No placeholder tokens found |
 | docs\authoring.md | PASS | No placeholder tokens found |
 | docs\evaluation.md | PASS | No placeholder tokens found |
-| dist layout | PASS | 33 generated skill files found |
-| dist support files | PASS | Shared references and templates packaged with every generated skill |
-| Build-SkillDistributions.ps1 -Check | SKIP | Run with -Check to compare generated distributions. |
-| plugin layout | PASS | Codex, Claude, and Copilot plugin manifests and host skill bundles present |
-| Build-AgenticWorkflowPlugin.ps1 -Check | SKIP | Run with -Check to compare generated plugin bundle. |
+| dist layout | SKIP | dist/ is not present yet. |
+| Build-SkillDistributions.ps1 -Check | SKIP | dist/ is not present yet. |
+| plugin layout | SKIP | dist/plugin-marketplace is not present yet. |
+| Build-AgenticWorkflowPlugin.ps1 -Check | SKIP | dist/plugin-marketplace is not present yet. |
 
 ## Commands
 
