@@ -157,89 +157,20 @@ function ConvertTo-GitHubRepositoryUrl {
     return $normalized
 }
 
-function Get-GitHubRepositoryInfo {
-    try {
-        $gitUrl = & git -C $packageRoot remote get-url origin 2>$null
-        if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace($gitUrl)) {
-            return $null
-        }
-
-        $repoUrl = ConvertTo-GitHubRepositoryUrl -Url $gitUrl
-        if ($repoUrl -notmatch '^https://github\.com/(?<owner>[^/]+)/(?<repo>[^/]+?)(\.git)?$') {
-            return $null
-        }
-
-        return [pscustomobject]@{
-            RepositoryUrl = $repoUrl
-            Owner = $Matches.owner
-            Repo = $Matches.repo
-        }
-    } catch {
-        return $null
-    }
-}
-
-function Get-PlatformMarketplaceRelativePath {
-    param([Parameter(Mandatory)] [string]$PlatformName)
-
-    switch ($PlatformName) {
-        'codex' { return 'marketplace.json' }
-        'copilot' { return 'hosts/copilot-marketplace/marketplace.json' }
-        'claude' { return 'hosts/claude-marketplace/.claude-plugin/marketplace.json' }
-    }
-
-    throw "Unsupported platform: $PlatformName"
-}
-
-function ConvertTo-GitHubPagesUrl {
-    param(
-        [Parameter(Mandatory)] [string]$RepositoryUrl,
-        [Parameter(Mandatory)] [string]$RelativePath
-    )
-
-    if ($RepositoryUrl -match '^https://(?<owner>[^.]+)\.github\.io/(?<repo>[^/]+)(?:/(?<path>.*))?$') {
-        $baseUrl = "https://$($Matches.owner).github.io/$($Matches.repo)"
-        if ([string]::IsNullOrWhiteSpace($Matches.path)) {
-            return "$baseUrl/$RelativePath"
-        }
-
-        return $RepositoryUrl
-    }
-
-    if ($RepositoryUrl -match '^https://github\.com/(?<owner>[^/]+)/(?<repo>[^/]+?)(\.git)?$') {
-        return "https://$($Matches.owner).github.io/$($Matches.repo)/$RelativePath"
-    }
-
-    return $RepositoryUrl
+function Get-DefaultMarketplaceRepositoryUrl {
+    return 'https://github.com/jleiva-gap/agentic-workflow-skills-marketplace'
 }
 
 function Get-ResolvedMarketplaceSource {
-    param([Parameter(Mandatory)] [string]$PlatformName)
-
     if (-not [string]::IsNullOrWhiteSpace($MarketplaceSource)) {
-        $normalized = ConvertTo-GitHubRepositoryUrl -Url $MarketplaceSource
-        if ($normalized -match 'marketplace\.json($|\?)') {
-            return $normalized
-        }
-
-        $repoInfo = Get-GitHubRepositoryInfo
-        if ($null -eq $repoInfo) {
-            throw 'MarketplaceSource was provided, but the repository remote could not be resolved to build a GitHub Pages marketplace URL.'
-        }
-
-        return ConvertTo-GitHubPagesUrl -RepositoryUrl $normalized -RelativePath (Get-PlatformMarketplaceRelativePath -PlatformName $PlatformName)
+        return (ConvertTo-GitHubRepositoryUrl -Url $MarketplaceSource)
     }
 
     if ($Source -ne 'marketplace') {
         return $null
     }
 
-    $repoInfo = Get-GitHubRepositoryInfo
-    if ($null -eq $repoInfo) {
-        throw 'MarketplaceSource is required when -Source marketplace is used and the origin remote cannot be resolved.'
-    }
-
-    return ConvertTo-GitHubPagesUrl -RepositoryUrl $repoInfo.RepositoryUrl -RelativePath (Get-PlatformMarketplaceRelativePath -PlatformName $PlatformName)
+    return (Get-DefaultMarketplaceRepositoryUrl)
 }
 
 function Write-MarketplaceInstallInstructions {
@@ -285,7 +216,7 @@ function Install-PluginPlatform {
 
     try {
         if ($Source -eq 'marketplace') {
-            $sourceReference = Get-ResolvedMarketplaceSource -PlatformName $PlatformName
+            $sourceReference = Get-ResolvedMarketplaceSource
             if ($PSCmdlet.ShouldProcess($PlatformName, "Print $PlatformName marketplace install steps from $sourceReference")) {
                 Write-MarketplaceInstallInstructions -PlatformName $PlatformName -SourceReference $sourceReference
             }
@@ -299,7 +230,7 @@ function Install-PluginPlatform {
 
         $result.Succeeded = $true
         if ($Source -eq 'marketplace') {
-            $result.Message = "Prepared $PlatformName marketplace install commands from $((Get-ResolvedMarketplaceSource -PlatformName $PlatformName))"
+            $result.Message = "Prepared $PlatformName marketplace install commands from $((Get-ResolvedMarketplaceSource))"
         } else {
             $result.Message = "Installed $PlatformName plugin bundle to $targetRoot"
         }

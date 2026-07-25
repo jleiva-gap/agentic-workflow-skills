@@ -30,13 +30,13 @@ The review logic itself stays in the review skill family shipped with this packa
 ## Workflow
 
 ```mermaid
-flowchart LR
+graph TD
     A[Story or feature request] --> B[Approved design]
     B --> C[Approved plan]
     C --> D[Implementation]
     D --> E[Self QA review]
-    E -->|Pass| F[Handoff]
-    E -->|Findings| G[Remediation handoff]
+    E --> F[Handoff]
+    E --> G[Remediation handoff]
     G --> C
     F --> H[Resume when needed]
 ```
@@ -84,26 +84,30 @@ agentic-workflow-skills/
 
 ## Install
 
-Install from the published GitHub Pages site using the host you want to run:
+Install from the published marketplace repository. This repo is the canonical source; the separate `agentic-workflow-skills-marketplace` repo is the remote install target.
 
 ```mermaid
-flowchart TB
-    A[GitHub Pages marketplace] --> B{Host}
-    B --> C[Codex]
-    B --> D[GitHub Copilot CLI]
-    B --> E[Claude Code]
-    C --> C1[codex plugin marketplace add]
-    C1 --> C2[codex plugin add]
-    D --> D1[copilot plugin marketplace add]
-    D1 --> D2[copilot plugin install]
-    E --> E1[claude plugin marketplace add]
-    E1 --> E2[claude plugin install]
+graph TD
+    A[agentic-workflow-skills source repo] --> B[Built marketplace bundle]
+    B --> C[agentic-workflow-skills-marketplace repo]
+    C --> D[Codex]
+    C --> E[GitHub Copilot CLI]
+    C --> F[Claude Code]
+    D --> D1[codex plugin marketplace add]
+    D1 --> D2[codex plugin add]
+    E --> E1[copilot plugin marketplace add]
+    E1 --> E2[copilot plugin install]
+    F --> F1[claude plugin marketplace add]
+    F1 --> F2[claude plugin install]
 ```
 
 ### Codex
 
 ```powershell
-codex plugin marketplace add "https://jleiva-gap.github.io/agentic-workflow-skills/marketplace.json"
+codex plugin marketplace add "https://github.com/jleiva-gap/agentic-workflow-skills-marketplace"
+```
+
+```powershell
 codex plugin add agentic-workflow-skills@agentic-workflow-skills-local
 ```
 
@@ -112,18 +116,24 @@ Start a new Codex thread after installation so the plugin skills are loaded.
 ### GitHub Copilot CLI
 
 ```powershell
-copilot plugin marketplace add "https://jleiva-gap.github.io/agentic-workflow-skills/hosts/copilot-marketplace/marketplace.json"
+copilot plugin marketplace add "https://github.com/jleiva-gap/agentic-workflow-skills-marketplace"
+```
+
+```powershell
 copilot plugin install agentic-workflow-skills@agentic-workflow-skills-local
 ```
 
 ### Claude Code
 
 ```powershell
-claude plugin marketplace add "https://jleiva-gap.github.io/agentic-workflow-skills/hosts/claude-marketplace/.claude-plugin/marketplace.json"
+claude plugin marketplace add "https://github.com/jleiva-gap/agentic-workflow-skills-marketplace"
+```
+
+```powershell
 claude plugin install agentic-workflow-skills@agentic-workflow-skills-local
 ```
 
-These commands point at the generated marketplace JSON files published from GitHub Pages.
+All three hosts use the same marketplace repository URL. The remote install command clones that repository, then the host-specific install command selects the `agentic-workflow-skills` package from the generated marketplace metadata.
 
 For rebuild, validation, local install, and packaging steps, see [docs/developer-guide.md](docs/developer-guide.md).
 
