@@ -11,7 +11,7 @@ Rebuild when you change any of the following:
 - `scripts/`
 - shared templates or references that feed generation
 
-You do not need to rebuild just to use the published GitHub Pages marketplace source in Codex. Rebuilds are for maintainers and contributors.
+You do not need to rebuild just to use the published marketplace repository in Codex, Copilot, or Claude. Rebuilds are for maintainers and contributors.
 
 ## Build
 
@@ -90,23 +90,25 @@ It includes:
 
 The bundle is generated output and should not be edited manually.
 
-## GitHub Pages Publish
+## Marketplace Publish
 
-The published marketplace files come from GitHub Actions and are hosted by GitHub Pages.
+The marketplace is published into a separate repository so remote installs can clone a real Git repository instead of a raw manifest URL.
 
-Before the first publish, set the repository's Pages source to `GitHub Actions` in GitHub Settings so the deployment workflow can initialize the site.
+The source of truth remains this repository. After rebuilding, publish the generated marketplace bundle into the sibling marketplace repository root so its top level contains the generated `marketplace.json` and plugin layout.
 
-The install URLs should point at:
-
-- `https://jleiva-gap.github.io/agentic-workflow-skills/marketplace.json`
-- `https://jleiva-gap.github.io/agentic-workflow-skills/hosts/copilot-marketplace/marketplace.json`
-- `https://jleiva-gap.github.io/agentic-workflow-skills/hosts/claude-marketplace/.claude-plugin/marketplace.json`
-
-To prepare marketplace install commands from the local repository configuration:
+Prepare marketplace install commands from the local repository configuration:
 
 ```powershell
 pwsh ./scripts/Install-AgenticWorkflowPlugin.ps1 -Platform all -Source marketplace
 ```
+
+Publish the generated bundle into the marketplace repository:
+
+```powershell
+pwsh ./scripts/Publish-AgenticWorkflowMarketplace.ps1 -MarketplaceRoot ..\agentic-workflow-skills-marketplace
+```
+
+If the marketplace repository lives elsewhere, pass its root path explicitly with `-MarketplaceRoot`.
 
 To install all host bundles from the generated output:
 
@@ -126,7 +128,7 @@ pwsh ./scripts/Install-AgenticWorkflowPlugin.ps1 -Platform all -Scope project -F
 2. Rebuild distributions and the plugin bundle.
 3. Run the package validator.
 4. Reinstall the generated bundle if you are testing locally.
-5. Review `dist/` and `artifacts/validation-report.md` before shipping.
+5. Publish the marketplace repository and review `artifacts/validation-report.md` before shipping.
 
 ## Generated Artifacts
 

@@ -15,7 +15,7 @@ This package is designed for Windows-first automation with PowerShell 7+.
 - GitHub Copilot
 - Claude Code
 
-Codex can consume the generated local plugin marketplace bundle under `dist/plugin-marketplace/`. For remote install, point Codex at the published `marketplace.json` file on GitHub Pages. Claude Code can consume `dist/plugin-marketplace/hosts/claude-marketplace/` through `/plugin marketplace add` or `claude plugin marketplace add`, using the published Pages URL for `hosts/claude-marketplace/.claude-plugin/marketplace.json`. GitHub Copilot CLI can consume `dist/plugin-marketplace/hosts/copilot-marketplace/` through `copilot plugin marketplace add` plus `copilot plugin install`, using the published Pages URL for `hosts/copilot-marketplace/marketplace.json`.
+Codex can consume the generated local plugin marketplace bundle under `dist/plugin-marketplace/`. For remote install, point Codex at the published `agentic-workflow-skills-marketplace` repository root. Claude Code can consume `dist/plugin-marketplace/hosts/claude-marketplace/` through `claude plugin marketplace add` plus `claude plugin install`, using the same published repository root. GitHub Copilot CLI can consume `dist/plugin-marketplace/hosts/copilot-marketplace/` through `copilot plugin marketplace add` plus `copilot plugin install`, also using the same repository root.
 
 The host overlays in `platform/` control the generated frontmatter and invocation metadata for each host. That is the adapter layer: canonical workflow behavior stays in `src/`, while the host wrapper changes only how the skill is invoked.
 
