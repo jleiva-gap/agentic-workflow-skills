@@ -27,7 +27,7 @@ The process id should normally match the approved plan filename stem `YYYY-MM-DD
 4. Inspect git status, branch, recent commits, and current diff.
 5. Confirm that the handoff process id still maps to the current approved artifacts and that those artifacts still exist.
 6. Compare the handoff fields against the plan, progress artifact, and repository state.
-7. Check whether the first pending task, baseline commit, current working tree state, and last verified evidence still agree.
+7. Check whether the first pending task, baseline commit, current working tree state, latest progress task record, and last verified evidence still agree.
 8. Identify any stale, missing, contradictory, or ambiguous fields.
 9. Report a concise verification result that says whether the handoff is safe to reuse as-is, needs refresh, or cannot be reconciled safely.
 10. If the handoff is stale but still mostly usable, explain the smallest required refresh.
@@ -39,6 +39,7 @@ The process id should normally match the approved plan filename stem `YYYY-MM-DD
 - Do not rewrite the handoff unless explicitly asked to refresh it.
 - Do not rely on chat history when the files disagree.
 - Do not claim a handoff is safe if the evidence contradicts it.
+- Do not accept progress evidence that lacks task id, files modified, verification command, verification result, or evidence source.
 - Do not include long rationale that belongs in the spec, plan, or handoff.
 - Do not demand explicit paths when a process id resolves the artifact set unambiguously.
 - Use English for all artifacts, reports, and blocker messages.

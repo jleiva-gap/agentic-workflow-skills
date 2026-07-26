@@ -2,5 +2,7 @@
   "name": "review-findings-validator",
   "description": "Use when an existing review report needs to be validated, challenged, deduplicated, or downgraded before it is sent onward.",
   "argumentHint": "<story-file> <review-report> [repo-root] [output-dir] [base-ref] [review-scope] [agent-name] [run-tests]",
-  "allowImplicitInvocation": false
+  "allowImplicitInvocation": false,
+  "userInvocable": true,
+  "disableModelInvocation": false
 }

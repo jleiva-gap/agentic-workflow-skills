@@ -8,12 +8,16 @@ $ErrorActionPreference = 'Stop'
 
 $scriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $packageRoot = Split-Path -Parent $scriptRoot
+$MarketplaceRoot = if ([System.IO.Path]::IsPathRooted($MarketplaceRoot)) {
+    [System.IO.Path]::GetFullPath($MarketplaceRoot)
+} else {
+    [System.IO.Path]::GetFullPath((Join-Path (Get-Location).Path $MarketplaceRoot))
+}
 $distRoot = Join-Path $packageRoot 'dist'
 $generatedMarketplaceRoot = Join-Path $distRoot 'plugin-marketplace'
 $protectedRelativePaths = @(
     '.git',
     '.gitignore',
-    'hosts',
     'LICENSE',
     'README.md'
 )
@@ -34,14 +38,6 @@ function Test-IsProtectedPath {
 
     foreach ($protected in $protectedRelativePaths) {
         if ($RelativePath -ieq $protected) {
-            return $true
-        }
-
-        if ($protected -eq 'hosts' -and $RelativePath.StartsWith('hosts\', [System.StringComparison]::OrdinalIgnoreCase)) {
-            return $true
-        }
-
-        if ($protected -eq 'hosts' -and $RelativePath.StartsWith('hosts/', [System.StringComparison]::OrdinalIgnoreCase)) {
             return $true
         }
 

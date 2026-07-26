@@ -40,7 +40,11 @@ Classify each original finding as one of:
 4. Confirm whether the severity matches the evidence.
 5. Deduplicate overlapping findings.
 6. Do not create new findings unless they are necessary to explain a severe issue missed by the original report.
-7. Produce a final triage table suitable for handoff to a developer.
+7. Produce a final triage table suitable for handoff to a developer using `templates/review-findings-template.md` or a compatible subset with the same finding fields.
+8. Preserve every original finding ID and assign exactly one final validation status to each original finding.
+9. Include a reason for every downgrade, rejection, or duplicate classification.
+10. Link each duplicate finding to the surviving canonical finding.
+11. Include only actionable validated findings in the remediation handoff input.
 
 ## Hard rules
 
@@ -48,6 +52,8 @@ Classify each original finding as one of:
 - Do not invent missing evidence.
 - Do not create broad new findings beyond the original report.
 - Do not label a finding as validated when the evidence is incomplete.
+- Do not let a finding disappear from the validation table; every original finding gets one final status.
+- Do not send `False Positive`, `Out of Scope`, `Already Covered`, or `Duplicate` findings into remediation input unless the entry is only a link to the surviving actionable finding.
 - Use English for all report content.
 
 ## Expected outputs

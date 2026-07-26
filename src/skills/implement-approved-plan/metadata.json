@@ -2,6 +2,7 @@
   "name": "implement-approved-plan",
   "description": "Use when an approved design specification and implementation plan are ready for task-by-task implementation and verification.",
   "argumentHint": "<plan-path> [spec-path]",
-  "allowImplicitInvocation": false
+  "allowImplicitInvocation": false,
+  "userInvocable": true,
+  "disableModelInvocation": true
 }
-

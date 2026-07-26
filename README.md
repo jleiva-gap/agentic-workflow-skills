@@ -18,7 +18,7 @@ The repository keeps the canonical workflow behavior in `src/`, generates self-c
 
 PowerShell scripts in `scripts/` are supporting build, validation, installation, and packaging helpers. They are part of the delivery toolchain, not the primary purpose of the repository.
 
-For a practical guide to choosing among the review skills, see [docs/review-strategy.md](docs/review-strategy.md).
+For a compact end-to-end usage guide with skill parameters, see [docs/quick-reference.md](docs/quick-reference.md). For a practical guide to choosing among the review skills, see [docs/review-strategy.md](docs/review-strategy.md).
 
 When work crosses tools, the handoff record is the portability boundary. The next executor should be able to continue from the spec, plan, handoff, and progress files alone.
 
@@ -26,6 +26,8 @@ The independent QA review packet is separate from the implementation handoff. QA
 If QA finds issues, the review findings report should be used to refresh the implementation handoff before the next fix pass.
 
 The review logic itself stays in the review skill family shipped with this package. The `self-qa-review` wrapper routes to those review skills instead of copying their behavior.
+
+Review reports use the shared findings schema bundled as `templates/review-findings-template.md`. That schema keeps finding IDs, severity, confidence, validation status, evidence, failure path, correction direction, and required verification consistent across review variants.
 
 ## Workflow
 
@@ -44,6 +46,8 @@ graph TD
 When the self-QA pass finds issues, the flow branches through a remediation handoff before planning the fix.
 
 The implementation handoff is artifact-driven because chat context is not a reliable source of truth for approval state, implementation progress, or resume decisions.
+
+Progress records are evidence-driven too. The bundled progress template records task id, files modified, commit evidence, targeted and regression verification, deviations, risks, and evidence source so resume workflows can distinguish verified work from stale or partial work.
 
 ## What is included
 
@@ -348,11 +352,15 @@ Copilot renders the generated skill files under `.github/skills/`.
 
 Use the `/skill-name` invocation style shown in the skill metadata examples.
 
+Copilot frontmatter is rendered from each canonical skill metadata file. User-facing entrypoints remain user-invocable, while internal helpers and reusable review skills can remain model-invocable for downstream orchestration.
+
 ### Claude Code
 
 Claude renders the generated skill files under `.claude/skills/`.
 
 Use the `/skill-name` invocation style shown in the skill metadata examples.
+
+Claude frontmatter follows the same per-skill invocation metadata used for Copilot.
 
 ## Input examples
 
@@ -370,7 +378,7 @@ Inline story example:
 $story-to-plan story_id=STORY-001 story_source="Add retry logic for the API client"
 ```
 
-For maintainer workflows, generated artifacts, validation, and rebuild guidance, see [docs/developer-guide.md](docs/developer-guide.md), [docs/workflow-handoff.md](docs/workflow-handoff.md), [docs/agentic-workflow-manual.md](docs/agentic-workflow-manual.md), and [docs/agentic-workflow-diagrams.md](docs/agentic-workflow-diagrams.md).
+For maintainer workflows, generated artifacts, validation, and rebuild guidance, see [docs/quick-reference.md](docs/quick-reference.md), [docs/developer-guide.md](docs/developer-guide.md), [docs/workflow-handoff.md](docs/workflow-handoff.md), [docs/agentic-workflow-manual.md](docs/agentic-workflow-manual.md), and [docs/agentic-workflow-diagrams.md](docs/agentic-workflow-diagrams.md).
 
 ## License
 

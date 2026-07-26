@@ -44,6 +44,7 @@ $requiredCanonical = @(
     'src\shared\templates\cross-tool-handoff-template.md',
     'src\shared\templates\design-handoff-template.md',
     'src\shared\templates\implementation-progress-template.md',
+    'src\shared\templates\review-findings-template.md',
     'src\skills\story-to-plan\body.md',
     'src\skills\story-to-plan\metadata.json',
     'src\skills\implement-approved-plan\body.md',
@@ -164,6 +165,58 @@ function Test-NoPlaceholderTokens {
     $content = Get-Content -Raw -LiteralPath (Join-Path $packageRoot $RelativePath)
     if ($content -match '\b(TBD|TODO|implement later|fill in details)\b') {
         throw "Placeholder token found in $RelativePath."
+    }
+}
+
+function Test-ProgressTemplateEvidenceFields {
+    $relativePath = 'src\shared\templates\implementation-progress-template.md'
+    $content = Get-Content -Raw -LiteralPath (Join-Path $packageRoot $relativePath)
+    $requiredPatterns = @(
+        'Task id:',
+        'Completion timestamp:',
+        'Files modified:',
+        'Commit SHA:',
+        'Targeted test command:',
+        'Targeted test result:',
+        'Regression command:',
+        'Regression result:',
+        'Deviations from plan:',
+        'Remaining risks:',
+        'Evidence source:'
+    )
+
+    $missing = @($requiredPatterns | Where-Object { $content -notmatch [regex]::Escape($_) })
+    if ($missing.Count -gt 0) {
+        throw "Progress template missing evidence fields: $($missing -join ', ')."
+    }
+}
+
+function Test-GeneratedInvocationMetadata {
+    param(
+        [Parameter(Mandatory)] [string]$HostName,
+        [Parameter(Mandatory)] [string]$SkillRoot
+    )
+
+    foreach ($metadataPath in Get-ChildItem -LiteralPath (Join-Path $srcRoot 'skills') -Directory | ForEach-Object { Join-Path $_.FullName 'metadata.json' }) {
+        $metadata = Get-Content -Raw -LiteralPath $metadataPath | ConvertFrom-Json
+        $skillName = $metadata.name
+        $skillFile = Join-Path $SkillRoot (Join-Path $skillName 'SKILL.md')
+        if (-not (Test-Path -LiteralPath $skillFile)) {
+            throw "Missing generated $HostName skill file for $skillName."
+        }
+
+        $content = Get-Content -Raw -LiteralPath $skillFile
+        $expectedUserInvocable = if ($null -ne $metadata.PSObject.Properties['userInvocable']) { [bool]$metadata.userInvocable } else { $true }
+        $expectedDisableModelInvocation = if ($null -ne $metadata.PSObject.Properties['disableModelInvocation']) { [bool]$metadata.disableModelInvocation } else { $true }
+        $expectedUserLine = "user-invocable: $($expectedUserInvocable.ToString().ToLowerInvariant())"
+        $expectedDisableLine = "disable-model-invocation: $($expectedDisableModelInvocation.ToString().ToLowerInvariant())"
+
+        if ($content -notmatch "(?m)^$([regex]::Escape($expectedUserLine))$") {
+            throw "$HostName generated metadata for $skillName does not contain '$expectedUserLine'."
+        }
+        if ($content -notmatch "(?m)^$([regex]::Escape($expectedDisableLine))$") {
+            throw "$HostName generated metadata for $skillName does not contain '$expectedDisableLine'."
+        }
     }
 }
 
@@ -295,6 +348,14 @@ try {
         }
     }
 
+    try {
+        Test-ProgressTemplateEvidenceFields
+        $rows.Add((New-Result 'progress evidence template' 'PASS' 'Required resume evidence fields present'))
+    } catch {
+        $failed = $true
+        $rows.Add((New-Result 'progress evidence template' 'FAIL' $_.Exception.Message))
+    }
+
     if (Test-Path -LiteralPath $distRoot) {
         $skillFiles = @()
         foreach ($hostName in @('codex', 'copilot', 'claude')) {
@@ -320,7 +381,8 @@ try {
                 'references\blocking-conditions.md',
                 'templates\cross-tool-handoff-template.md',
                 'templates\design-handoff-template.md',
-                'templates\implementation-progress-template.md'
+                'templates\implementation-progress-template.md',
+                'templates\review-findings-template.md'
             )) {
                 if (-not (Test-Path -LiteralPath (Join-Path $skillDir $supportPath))) {
                     $missingSupport += "$($skillFile.FullName):$supportPath"
@@ -333,6 +395,20 @@ try {
         } else {
             $failed = $true
             $rows.Add((New-Result 'dist support files' 'FAIL' ($missingSupport -join '; ')))
+        }
+
+        foreach ($hostName in @('copilot', 'claude')) {
+            $skillRoot = switch ($hostName) {
+                'copilot' { Join-Path $distRoot 'copilot\.github\skills' }
+                'claude' { Join-Path $distRoot 'claude\.claude\skills' }
+            }
+            try {
+                Test-GeneratedInvocationMetadata -HostName $hostName -SkillRoot $skillRoot
+                $rows.Add((New-Result "$hostName invocation metadata" 'PASS' 'Generated frontmatter matches canonical skill metadata'))
+            } catch {
+                $failed = $true
+                $rows.Add((New-Result "$hostName invocation metadata" 'FAIL' $_.Exception.Message))
+            }
         }
 
         if ($Check) {

@@ -37,6 +37,17 @@ Update the shared references when you change:
 - the standard progress or handoff artifact structure.
 - the cross-tool handoff template.
 
+## When to update shared templates
+
+Update shared templates when you change:
+
+- the implementation progress evidence fields;
+- the cross-tool handoff payload;
+- the design handoff payload;
+- the canonical review findings schema.
+
+Every shared template is packaged with every generated skill. If a template is added or renamed, update package validation and Pester coverage so generated distributions fail when the template is missing.
+
 ## When to update skill bodies
 
 Update a skill body when you change:
@@ -54,7 +65,11 @@ Update skill metadata when you change:
 - the canonical skill name;
 - the description;
 - the argument hint;
+- `allowImplicitInvocation` for Codex;
+- `userInvocable` or `disableModelInvocation` for Copilot and Claude generated frontmatter;
 - the host support flags in `platform/`.
+
+`userInvocable` controls whether the skill remains directly invocable in hosts that support that frontmatter. `disableModelInvocation` controls whether the model may invoke the skill as a downstream orchestration dependency. User-facing entrypoints can keep model invocation disabled, while internal helpers and reusable review skills should stay model-invocable when wrappers depend on them.
 
 ## Build and verification loop
 

@@ -28,7 +28,7 @@ This is the best default when a review needs both speed and a second-pass sanity
 3. Challenge each finding for false-positive risk, scope drift, and missing evidence.
 4. Validate, downgrade, or discard findings that are not backed by the repository evidence.
 5. Keep only the final findings that survive the second pass.
-6. Produce a concise review report with a clear final recommendation.
+6. Produce a concise review report with a clear final recommendation using `templates/review-findings-template.md` or a compatible subset with the same finding fields.
 
 ## Hard rules
 
@@ -36,6 +36,7 @@ This is the best default when a review needs both speed and a second-pass sanity
 - Do not keep findings that fail the validation pass.
 - Do not invent a second report format if the validation stage can be folded into the final output.
 - Do not claim confidence without evidence.
+- Do not keep a finding unless it has one final validation status and enough evidence for that status.
 - Use English for all report content.
 
 ## Expected outputs

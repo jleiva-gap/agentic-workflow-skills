@@ -77,6 +77,23 @@ At minimum, fill in:
 
 The handoff should be readable on its own. Do not depend on chat context to explain missing facts.
 
+## What progress should contain
+
+Create progress records from the bundled `templates/implementation-progress-template.md`. Each verified task record should include:
+
+- task id;
+- status;
+- completion timestamp;
+- files modified;
+- commit SHA when available;
+- targeted test command and result;
+- regression command and result when required;
+- deviations from the approved plan;
+- remaining risks;
+- evidence source.
+
+Resume and handoff verification should trust current code and test evidence over stale progress text. A checked plan task without matching progress evidence is not enough to prove completion.
+
 ## Recommended workflow
 
 1. Use `story-to-plan` to create the approved spec, approved plan, and handoff artifact.

@@ -29,7 +29,7 @@ This workflow is useful when the user wants a single, strict review result inste
 4. Challenge the implementation for edge cases, abuse cases, regression paths, and hidden dependencies.
 5. Deduplicate findings that overlap the same root cause.
 6. Keep only actionable, evidence-backed findings.
-7. Report both satisfaction gaps and adversarial risks in a single concise output.
+7. Report both satisfaction gaps and adversarial risks in a single concise output using `templates/review-findings-template.md` or a compatible subset with the same finding fields.
 
 ## Hard rules
 
@@ -37,6 +37,7 @@ This workflow is useful when the user wants a single, strict review result inste
 - Do not duplicate findings that describe the same issue.
 - Do not report speculative risks as confirmed defects.
 - Do not omit evidence when a finding is confirmed.
+- Do not emit duplicate findings for the same failure path; link related IDs instead.
 - Use English for all report content.
 
 ## Expected outputs

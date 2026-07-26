@@ -67,7 +67,28 @@ Describe 'Build-SkillDistributions.ps1' {
                 (Test-Path (Join-Path $skillDir 'references\input-contract.md')) | Should -BeTrue
                 (Test-Path (Join-Path $skillDir 'references\artifact-contract.md')) | Should -BeTrue
                 (Test-Path (Join-Path $skillDir 'templates\cross-tool-handoff-template.md')) | Should -BeTrue
+                (Test-Path (Join-Path $skillDir 'templates\review-findings-template.md')) | Should -BeTrue
             }
+        } finally {
+            Remove-TestPackageCopy -Path $copy
+        }
+    }
+
+    It 'renders Copilot and Claude invocation metadata from each canonical skill metadata file' {
+        $copy = New-TestPackageCopy
+        try {
+            (Invoke-BuildScript -PackageCopy $copy) | Should -Be 0
+
+            $copilotInternal = Get-Content -Raw -LiteralPath (Join-Path $copy 'dist\copilot\.github\skills\create-handoff\SKILL.md')
+            $copilotEntryPoint = Get-Content -Raw -LiteralPath (Join-Path $copy 'dist\copilot\.github\skills\story-to-plan\SKILL.md')
+            $claudeInternal = Get-Content -Raw -LiteralPath (Join-Path $copy 'dist\claude\.claude\skills\create-handoff\SKILL.md')
+
+            $copilotInternal | Should -Match '(?m)^user-invocable: true$'
+            $copilotInternal | Should -Match '(?m)^disable-model-invocation: false$'
+            $copilotEntryPoint | Should -Match '(?m)^user-invocable: true$'
+            $copilotEntryPoint | Should -Match '(?m)^disable-model-invocation: true$'
+            $claudeInternal | Should -Match '(?m)^user-invocable: true$'
+            $claudeInternal | Should -Match '(?m)^disable-model-invocation: false$'
         } finally {
             Remove-TestPackageCopy -Path $copy
         }

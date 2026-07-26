@@ -2,6 +2,7 @@
   "name": "story-to-plan",
   "description": "Use when a user story or feature request must be converted into an approved design specification and implementation plan before coding.",
   "argumentHint": "<story-id> <story-source> [notes-source]",
-  "allowImplicitInvocation": false
+  "allowImplicitInvocation": false,
+  "userInvocable": true,
+  "disableModelInvocation": true
 }
-

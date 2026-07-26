@@ -29,6 +29,7 @@ This workflow complements strict acceptance-criteria review. It does not replace
 4. Confirm whether the current evidence covers each risk.
 5. Separate confirmed defects from plausible risks that need more evidence.
 6. Keep the report focused on actionable failure modes.
+7. Write findings using `templates/review-findings-template.md` or a compatible subset with the same finding fields.
 
 ## Hard rules
 
@@ -36,6 +37,7 @@ This workflow complements strict acceptance-criteria review. It does not replace
 - Do not generalize beyond the change under review.
 - Do not convert every hypothetical into a finding.
 - Do not claim a defect without evidence or a concrete failure path.
+- Do not emit confirmed findings without a finding ID, severity, confidence, evidence, concrete failure path, correction direction, and required verification.
 - Use English for report content.
 
 ## Expected outputs

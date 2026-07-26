@@ -38,6 +38,7 @@ If the process id or artifact paths cannot be resolved unambiguously, ask one fo
 - Do not discard uncommitted work without explicit approval.
 - Do not assume chat history is available.
 - Do not claim a task is complete if evidence contradicts it.
+- Do not treat a progress record as verified unless it includes task id, files modified, verification command, verification result, and evidence source that still match the current repository state.
 - Do not hide plan divergence.
 - Do not demand explicit paths when a process id resolves the artifact set unambiguously.
 - Use English for resumed-state analysis, blockers, progress updates, and summaries.

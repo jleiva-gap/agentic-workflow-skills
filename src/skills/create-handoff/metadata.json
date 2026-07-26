@@ -2,5 +2,7 @@
   "name": "create-handoff",
   "description": "Use when you need to capture the current approved state into a compact cross-tool handoff, usually from a process id, or refresh it after a pause.",
   "argumentHint": "process_id=<process-id> [plan=<path>] [spec=<path>] [progress=<path>]",
-  "allowImplicitInvocation": false
+  "allowImplicitInvocation": false,
+  "userInvocable": true,
+  "disableModelInvocation": false
 }

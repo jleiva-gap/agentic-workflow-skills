@@ -17,7 +17,9 @@ This package is designed for Windows-first automation with PowerShell 7+.
 
 Codex can consume the generated local plugin marketplace bundle under `dist/plugin-marketplace/`. For remote installation, use the repository root `https://github.com/jleiva-gap/agentic-workflow-skills-marketplace` with all three hosts. Codex discovers `.agents/plugins/marketplace.json` and installs the plugin from the marketplace repository root, Claude Code discovers `.claude-plugin/marketplace.json`, and GitHub Copilot CLI discovers the repository-root `marketplace.json`.
 
-The host overlays in `platform/` control the generated frontmatter and invocation metadata for each host. That is the adapter layer: canonical workflow behavior stays in `src/`, while the host wrapper changes only how the skill is invoked.
+The host overlays in `platform/` control distribution roots and host-level support flags. Per-skill invocation metadata is canonical in each `src/skills/<skill>/metadata.json` file. That metadata renders Codex `allowImplicitInvocation` and Copilot/Claude `user-invocable` plus `disable-model-invocation` frontmatter.
+
+User-facing entrypoints remain directly invocable. Internal helpers and reusable review skills may be model-invocable so wrapper skills such as `self-qa-review` can route to `create-handoff` or review variants without hiding downstream dependencies from the host model.
 
 ## Mandatory operational rules
 
@@ -43,8 +45,10 @@ Revalidate this package when any of the following change:
 - host frontmatter support;
 - host skill installation paths;
 - the generator format;
+- per-skill invocation metadata semantics;
 - the shared input or artifact contract;
 - the cross-tool handoff template;
+- the review findings template;
 - the approval or verification gate language.
 
 ## Known compatibility constraints

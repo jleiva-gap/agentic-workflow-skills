@@ -34,6 +34,10 @@ It should:
 - avoid vague style-only commentary unless it affects correctness, maintainability, or delivery risk
 - be specific enough that the next change can be implemented without guesswork
 
+Review-producing skills should use the bundled `templates/review-findings-template.md` or a compatible subset. Confirmed findings need stable finding IDs, severity, confidence, validation status, acceptance-criterion mapping, evidence, a concrete failure path, impact, correction direction, and required verification.
+
+Validation reports must preserve every original finding ID and assign exactly one final status to each original finding. Duplicate findings should point to the surviving canonical finding. Remediation handoffs should include only actionable validated findings, not false positives, out-of-scope items, or already-covered work.
+
 ## When To Use Which Skill
 
 - Use `critical-review` when you want the baseline review gate
@@ -41,4 +45,3 @@ It should:
 - Use `critical-adversarial-review` when a release or handoff deserves a stronger combined pass
 - Use `critical-review-with-validation` when you want the review result challenged before it is finalized
 - Use `review-findings-validator` when you need to process findings from another review and remove duplicates or false positives
-

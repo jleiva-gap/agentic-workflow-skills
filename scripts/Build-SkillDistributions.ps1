@@ -79,6 +79,21 @@ function Escape-YamlScalar {
     return '"' + $text + '"'
 }
 
+function Get-OptionalMetadataBool {
+    param(
+        [Parameter(Mandatory)] $Metadata,
+        [Parameter(Mandatory)] [string]$PropertyName,
+        [Parameter(Mandatory)] [bool]$DefaultValue
+    )
+
+    $property = $Metadata.PSObject.Properties[$PropertyName]
+    if ($null -eq $property -or $null -eq $property.Value) {
+        return $DefaultValue
+    }
+
+    return [bool]$property.Value
+}
+
 function Get-SkillDefinitions {
     foreach ($skillName in $skillNames) {
         $skillDir = Join-Path $srcRoot (Join-Path 'skills' $skillName)
@@ -131,13 +146,13 @@ function New-FrontMatter {
         }
         'copilot' {
             $frontmatter.'argument-hint' = $Skill.Metadata.argumentHint
-            $frontmatter.'user-invocable' = $true
-            $frontmatter.'disable-model-invocation' = $true
+            $frontmatter.'user-invocable' = Get-OptionalMetadataBool -Metadata $Skill.Metadata -PropertyName 'userInvocable' -DefaultValue $true
+            $frontmatter.'disable-model-invocation' = Get-OptionalMetadataBool -Metadata $Skill.Metadata -PropertyName 'disableModelInvocation' -DefaultValue $true
         }
         'claude' {
             $frontmatter.'argument-hint' = $Skill.Metadata.argumentHint
-            $frontmatter.'user-invocable' = $true
-            $frontmatter.'disable-model-invocation' = $true
+            $frontmatter.'user-invocable' = Get-OptionalMetadataBool -Metadata $Skill.Metadata -PropertyName 'userInvocable' -DefaultValue $true
+            $frontmatter.'disable-model-invocation' = Get-OptionalMetadataBool -Metadata $Skill.Metadata -PropertyName 'disableModelInvocation' -DefaultValue $true
         }
         default {
             throw "Unsupported host: $HostName"

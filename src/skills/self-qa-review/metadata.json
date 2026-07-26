@@ -2,5 +2,7 @@
   "name": "self-qa-review",
   "description": "Use when a completed implementation needs a self-QA review and a remediation handoff based on the findings.",
   "argumentHint": "<story-file> [review-type] [review-file] [repo-root] [output-dir]",
-  "allowImplicitInvocation": false
+  "allowImplicitInvocation": false,
+  "userInvocable": true,
+  "disableModelInvocation": true
 }

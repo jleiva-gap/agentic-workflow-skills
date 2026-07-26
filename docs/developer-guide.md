@@ -49,7 +49,7 @@ Run the package validator:
 pwsh ./scripts/Test-SkillPackage.ps1
 ```
 
-The validator writes `artifacts/validation-report.md` and reports required files, scenario coverage, metadata shape, and optional distribution drift checks.
+The validator writes `artifacts/validation-report.md` and reports required files, scenario coverage, metadata shape, progress evidence fields, generated invocation metadata, packaged shared templates, and optional distribution drift checks.
 
 ## Local Install
 
@@ -148,6 +148,10 @@ The canonical workflows write approved artifacts under `docs/superpowers/`, incl
 - implementation progress notes
 
 For cross-tool continuity, the canonical handoff payload lives at [`src/shared/templates/cross-tool-handoff-template.md`](../src/shared/templates/cross-tool-handoff-template.md). Generated skills also include it under `templates/cross-tool-handoff-template.md` so installed skills can run without the source package.
+
+For review consistency, the canonical findings schema lives at [`src/shared/templates/review-findings-template.md`](../src/shared/templates/review-findings-template.md). Review skills use that schema, and generated skills include it under `templates/review-findings-template.md`.
+
+For resume reliability, the canonical progress payload lives at [`src/shared/templates/implementation-progress-template.md`](../src/shared/templates/implementation-progress-template.md). Progress records should include task id, modified files, verification commands and results, deviations, risks, and evidence source.
 
 ## Approval Gates
 

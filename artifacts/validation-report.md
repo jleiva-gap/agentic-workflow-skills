@@ -1,7 +1,7 @@
 # Package Validation Report
 
-Generated: 2026-07-24T19:05:10.1354117-06:00
-Git commit: e40a4f2
+Generated: 2026-07-26T14:31:49.6531084-06:00
+Git commit: fd1623c
 PowerShell: 7.6.3
 
 | Check | Status | Details |
@@ -27,6 +27,7 @@ PowerShell: 7.6.3
 | src\shared\templates\cross-tool-handoff-template.md | PASS | Present |
 | src\shared\templates\design-handoff-template.md | PASS | Present |
 | src\shared\templates\implementation-progress-template.md | PASS | Present |
+| src\shared\templates\review-findings-template.md | PASS | Present |
 | src\skills\story-to-plan\body.md | PASS | Present |
 | src\skills\story-to-plan\metadata.json | PASS | Present |
 | src\skills\implement-approved-plan\body.md | PASS | Present |
@@ -126,11 +127,14 @@ PowerShell: 7.6.3
 | docs\compatibility.md | PASS | No placeholder tokens found |
 | docs\authoring.md | PASS | No placeholder tokens found |
 | docs\evaluation.md | PASS | No placeholder tokens found |
+| progress evidence template | PASS | Required resume evidence fields present |
 | dist layout | PASS | 33 generated skill files found |
 | dist support files | PASS | Shared references and templates packaged with every generated skill |
-| Build-SkillDistributions.ps1 -Check | SKIP | Run with -Check to compare generated distributions. |
+| copilot invocation metadata | PASS | Generated frontmatter matches canonical skill metadata |
+| claude invocation metadata | PASS | Generated frontmatter matches canonical skill metadata |
+| Build-SkillDistributions.ps1 -Check | PASS | No drift detected |
 | plugin layout | PASS | Codex root, Claude, and Copilot plugin manifests and host skill bundles present |
-| Build-AgenticWorkflowPlugin.ps1 -Check | SKIP | Run with -Check to compare generated plugin bundle. |
+| Build-AgenticWorkflowPlugin.ps1 -Check | PASS | No plugin drift detected |
 
 ## Commands
 

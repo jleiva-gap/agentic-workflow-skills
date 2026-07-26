@@ -29,7 +29,7 @@ This is a review-only workflow. Prefer static inspection first. Run tests only w
 4. Compare the implementation against each acceptance criterion.
 5. Treat missing evidence as a gap, not as proof that behavior exists.
 6. Prefer fewer high-confidence findings over long speculative lists.
-7. Write a concise report with the evidence used for each finding.
+7. Write a concise report using `templates/review-findings-template.md` or a compatible subset with the same finding fields.
 8. If tests are run, record the command and the result in the report.
 
 ## Hard rules
@@ -39,6 +39,7 @@ This is a review-only workflow. Prefer static inspection first. Run tests only w
 - Do not report style-only concerns unless they block correctness or reviewability.
 - Do not guess about behavior that is not backed by file, diff, or test evidence.
 - Do not hide uncertainty; classify it explicitly.
+- Do not emit confirmed findings without a finding ID, severity, confidence, evidence, concrete failure path, correction direction, and required verification.
 - Use English for all report content.
 
 ## Expected outputs

@@ -32,6 +32,7 @@ Implement an approved plan task by task with isolation, test-first execution, an
 - Do not continue past a design or plan contradiction.
 - Do not skip tests because the user wants speed.
 - Do not mark a task complete without verification evidence.
+- Do not write a completed progress record unless it includes task id, files modified, targeted test command and result, regression command and result when required, deviations, remaining risks, and evidence source.
 - Do not rely on stale progress text when current evidence disagrees.
 - Do not silently replace the approved plan with a different approach.
 - Use English for progress notes, blocker reports, and final summaries.
