@@ -18,7 +18,7 @@ The repository keeps the canonical workflow behavior in `src/`, generates self-c
 
 PowerShell scripts in `scripts/` are supporting build, validation, installation, and packaging helpers. They are part of the delivery toolchain, not the primary purpose of the repository.
 
-For a compact end-to-end usage guide with skill parameters, see [docs/quick-reference.md](docs/quick-reference.md). For a practical guide to choosing among the review skills, see [docs/review-strategy.md](docs/review-strategy.md).
+For a compact end-to-end usage guide with skill parameters, see [docs/quick-reference.md](docs/quick-reference.md). For scenario-based skill chains, see [docs/skill-cheat-sheet.md](docs/skill-cheat-sheet.md). For a practical guide to choosing among the review skills, see [docs/review-strategy.md](docs/review-strategy.md).
 
 When work crosses tools, the handoff record is the portability boundary. The next executor should be able to continue from the spec, plan, handoff, and progress files alone.
 

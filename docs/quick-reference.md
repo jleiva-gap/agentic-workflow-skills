@@ -1,6 +1,6 @@
 # Agentic Workflow Quick Reference
 
-Use this guide when you need the shortest practical reference for the flow, handoffs, self QA, review skills, and skill parameters.
+Use this guide when you need the shortest practical reference for the flow, handoffs, self QA, review skills, and skill parameters. For scenario-based skill chains, see [docs/skill-cheat-sheet.md](skill-cheat-sheet.md).
 
 ## Host Invocation
 
@@ -273,7 +273,7 @@ Outputs: combined critical and adversarial review report, evidence-backed findin
 Typical:
 
 ```text
-$review-findings-validator story_file=.plans/STORY-001.md review_report=.wi/reviews/STORY-001-review.md
+$review-findings-validator story_file=.plans/STORY-001.md review_report=docs/superpowers/reviews/STORY-001-review.md
 ```
 
 Parameters:
